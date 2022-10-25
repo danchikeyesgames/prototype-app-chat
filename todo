@@ -3,6 +3,9 @@ TODO:
 @ Realization console application: 
   * make simple socket connection
  
+  * create configuration make-file
+    for automatical build project
+ 
   * make message structure to transform packets between server and clients
 
   * create threadpool API
@@ -15,6 +18,8 @@ TODO:
 
   * make to transform messages between clients using threadpool,
     server work to process messages from clients in multithread mode with queue messages
+
+  * rewrite make to Cmake
 
   (c) Linux version
  -----------------------------------------------------------
