@@ -1,0 +1,36 @@
+TODO:
+    
+@ Realization console application: 
+  * make simple socket connection
+ 
+  * make message structure to transform packets between server and clients
+
+  * create threadpool API
+
+  * design structure to save information of clients
+
+  * make multiclient connection using list
+
+  * create queue messages is based on list
+
+  * make to transform messages between clients using threadpool,
+    server work to process messages from clients in multithread mode with queue messages
+
+  (c) Linux version
+ -----------------------------------------------------------
+
+@ Realization window application:
+  *
+
+(c) Linux version
+
+------------------------------------------------------------
+
+@ Add graphics to window application
+  * 
+
+(c) Linux version
+
+------------------------------------------------------------
+
+@ Add support Windows OS
