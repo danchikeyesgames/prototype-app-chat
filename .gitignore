@@ -1,0 +1,9 @@
+# vscode congiguration files
+.vscode/
+
+# execute files
+*.elf
+
+# object files in directory
+objects/*
+*.o
