@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../include/xchat/ServerSockets.hpp"
+#include "../../include/xchat/ServerSockets.hpp"
 
 
 int main() {
@@ -9,8 +9,8 @@ int main() {
 
     server.wait_accept();
 
-    server.server_recv(buf, 1024, NULL);
-    server.server_send(buf, 1024, NULL);
+    server.server_recv(buf, 1024, 0);
+    server.server_send(buf, 1024, 0);
     std::cout << buf << std::endl;
 
     return 0;

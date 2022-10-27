@@ -17,9 +17,9 @@ int ServerSockets::wait_accept() {
 }
 
 int ServerSockets::server_send(const void *msg, int len, int flags) {
-    send(clientfd, msg, len, flags);
+    return send(clientfd, msg, len, flags);
 }
 
 int ServerSockets::server_recv(void *buf, int len, int flags) {
-    recv(clientfd, buf, len, flags);
+    return recv(clientfd, buf, len, flags);
 }

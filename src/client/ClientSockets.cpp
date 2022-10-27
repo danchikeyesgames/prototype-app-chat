@@ -1,4 +1,4 @@
-#include "../include/xchat/ClientSockets.hpp"
+#include "../../include/xchat/ClientSockets.hpp"
 
 ClientSockets::ClientSockets() : port(4888) {
     address.sin_family = AF_INET;
@@ -10,9 +10,9 @@ ClientSockets::ClientSockets() : port(4888) {
 }
 
 int ClientSockets::client_send(const void *msg, int len, int flags) {
-    send(sockfd, msg, len, flags);
+    return send(sockfd, msg, len, flags);
 }
 
 int ClientSockets::client_recv(void *buf, int len, int flags) {
-    recv(sockfd, buf, len, flags);
+    return recv(sockfd, buf, len, flags);
 }
