@@ -15,3 +15,11 @@ int ServerSockets::wait_accept() {
 
     return clientfd;
 }
+
+int ServerSockets::server_send(const void *msg, int len, int flags) {
+    send(clientfd, msg, len, flags);
+}
+
+int ServerSockets::server_recv(void *buf, int len, int flags) {
+    recv(clientfd, buf, len, flags);
+}

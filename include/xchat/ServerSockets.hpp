@@ -18,6 +18,8 @@ class ServerSockets {
     public:
         ServerSockets(unsigned short len_qeue);
         int wait_accept();
+        int server_send(const void *msg, int len, int flags);
+        int server_recv(void *buf, int len, int flags);
 };
 
 #endif      // __SERVER_SOCKETS_HPP__
