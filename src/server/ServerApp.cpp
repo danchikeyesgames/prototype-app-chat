@@ -3,7 +3,7 @@
 #include "../include/xchat/ServerSockets.hpp"
 
 
-int main(void) {
+int main() {
     ServerSockets server = 1;
     char buf[1024];
 
