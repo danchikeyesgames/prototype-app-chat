@@ -1,10 +1,12 @@
 TODO:
     
 @ Realization console application: 
-  * make simple socket connection
+  - (READY) make simple socket connection 
  
   * create configuration make-file
     for automatical build project
+
+  * create improve API for sockets looking like classes
  
   * make message structure to transform packets between server and clients
 
