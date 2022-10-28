@@ -24,6 +24,7 @@ class ServerSockets {
     private:
         int create_socket(int domain, int type, int protocol);
         int create_bind(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len);
+        int change_listen(int fd, int n);
 };
 
 #endif      // __SERVER_SOCKETS_HPP__

@@ -34,7 +34,6 @@ int ServerSockets::create_socket(int domain, int type, int protocol) {
     int sckfd = socket(domain, type, protocol);
     if (sckfd == -1) {
         perror("socket: ");
-        exit(EXIT_FAILURE);
     }
 
     return sckfd;
@@ -44,8 +43,16 @@ int ServerSockets::create_bind(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len)
     int bnd = bind(fd, addr, len);
     if (bnd < 0) {
         perror("bind: ");
-        exit(EXIT_FAILURE);
     }
 
     return bnd;
+}
+
+int ServerSockets::change_listen(int fd, int n) {
+    int lsn = listen(fd, n);
+    if (lsn < 0) {
+        perror("listen: ");
+    }
+
+    return lsn;
 }
