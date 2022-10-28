@@ -20,6 +20,9 @@ class ServerSockets {
         int wait_accept();
         int server_send(const void *msg, int len, int flags);
         int server_recv(void *buf, int len, int flags);
+
+    private:
+        int create_socket(int domain, int type, int protocol);
 };
 
 #endif      // __SERVER_SOCKETS_HPP__
