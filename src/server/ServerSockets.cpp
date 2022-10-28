@@ -8,7 +8,7 @@ ServerSockets::ServerSockets(unsigned short len_qeue) : port(4888) {
     address.sin_addr.s_addr = htonl(INADDR_ANY);
 
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);
-    bind(sockfd, (sockaddr *) &address, sizeof(address));
+    create_bind(sockfd, (sockaddr *) &address, sizeof(address));
     listen(sockfd, len_qeue);
 }
 
@@ -38,4 +38,14 @@ int ServerSockets::create_socket(int domain, int type, int protocol) {
     }
 
     return sckfd;
+}
+
+int ServerSockets::create_bind(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len) {
+    int bnd = bind(fd, addr, len);
+    if (bnd < 0) {
+        perror("bind: ");
+        exit(EXIT_FAILURE);
+    }
+
+    return bnd;
 }
