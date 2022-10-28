@@ -10,14 +10,14 @@
 #define NULL 0
 #endif
 
-#define SUCCESSFULL 0x00
-#define ERRSERVSOCK 0x01
-#define ERRSERVBIND 0x02
-#define ERRSERVLIST 0x04
-#define ERRSERVACCP 0x08
-#define ERRSERVSEND 0x10
-#define ERRSERVRECV 0x20
-#define ERRSERVQEUE 0x40
+#define SUCCESSFULL 0x0000
+#define ERRSERVSOCK 0x0001
+#define ERRSERVBIND 0x0002
+#define ERRSERVLIST 0x0004
+#define ERRSERVACCP 0x0008
+#define ERRSERVSEND 0x0010
+#define ERRSERVRECV 0x0020
+#define ERRSERVQEUE 0x0040
 
 const int default_port = 4888;
 
