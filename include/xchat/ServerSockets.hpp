@@ -13,11 +13,11 @@
 #define SUCCESSFULL 0x00
 #define ERRSERVSOCK 0x01
 #define ERRSERVBIND 0x02
-#define ERRSERVLIST 0x03
-#define ERRSERVACCP 0x04
-#define ERRSERVSEND 0x05
-#define ERRSERVRECV 0x06
-#define ERRSERVQEUE 0x07
+#define ERRSERVLIST 0x04
+#define ERRSERVACCP 0x08
+#define ERRSERVSEND 0x10
+#define ERRSERVRECV 0x20
+#define ERRSERVQEUE 0x40
 
 const int default_port = 4888;
 
