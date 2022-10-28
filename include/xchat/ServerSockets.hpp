@@ -32,6 +32,12 @@ class ServerSockets {
 
     public:
         ServerSockets(unsigned short len_qeue, int port = default_port);
+        unsigned int isSockErr();
+        unsigned int isAcceptErr();
+        unsigned int isSendErr();
+        unsigned int isRecvErr();
+
+    public:                             // protected
         int     wait_accept();
         ssize_t server_send(const void *msg, int len, int flags);
         ssize_t server_recv(void *buf, int len, int flags);
