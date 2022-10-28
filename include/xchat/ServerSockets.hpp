@@ -10,6 +10,12 @@
 #define NULL 0
 #endif
 
+#define SUCCESSFULL 0x00
+#define ERRSERVSOCK 0x01
+#define ERRSERVBIND 0x02
+
+const int default_port = 4888;
+
 typedef struct sockaddr_in sock_address;
 
 class ServerSockets {
@@ -17,9 +23,10 @@ class ServerSockets {
         int sockfd, clientfd;
         sock_address address;
         unsigned short port;
+        unsigned int errors;
 
     public:
-        ServerSockets(unsigned short len_qeue);
+        ServerSockets(unsigned short len_qeue, int port = default_port);
         int     wait_accept();
         ssize_t server_send(const void *msg, int len, int flags);
         ssize_t server_recv(void *buf, int len, int flags);
