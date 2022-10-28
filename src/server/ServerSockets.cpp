@@ -39,6 +39,15 @@ int ServerSockets::server_recv(void *buf, int len, int flags) {
     return num;
 }
 
+int ServerSockets::close_socket(int __fd) {
+    int err = close(__fd);
+    if (err < 0) {
+        perror("close socket: ");
+    }
+
+    return err;
+}
+
 /**
  * PRIVATE SEGMENT
 */

@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 #ifndef NULL
 #define NULL 0
@@ -20,6 +21,7 @@ class ServerSockets {
         int wait_accept();
         int server_send(const void *msg, int len, int flags);
         int server_recv(void *buf, int len, int flags);
+        int close_socket(int __fd);
 
     private:
         int create_socket(int domain, int type, int protocol);
