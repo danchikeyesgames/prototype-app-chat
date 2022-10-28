@@ -21,7 +21,7 @@ int ServerSockets::wait_accept() {
     return clientfd;
 }
 
-int ServerSockets::server_send(const void *msg, int len, int flags) {
+ssize_t ServerSockets::server_send(const void *msg, int len, int flags) {
     ssize_t num = send(clientfd, msg, len, flags);
     if (num == -1) {
         perror("send: ");
@@ -30,7 +30,7 @@ int ServerSockets::server_send(const void *msg, int len, int flags) {
     return num; 
 }
 
-int ServerSockets::server_recv(void *buf, int len, int flags) {
+ssize_t ServerSockets::server_recv(void *buf, int len, int flags) {
     ssize_t num = recv(clientfd, buf, len, flags);
     if (num == -1) {
         perror("recv: ");
