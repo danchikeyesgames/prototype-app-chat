@@ -19,6 +19,15 @@ int ClientSockets::client_recv(void *buf, int len, int flags) {
     return recv(sockfd, buf, len, flags);
 }
 
+int ClientSockets::connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len) {
+    int sock = connect(fd, addr, len);
+    if (sock == -1) {
+        perror("connect: ");
+    }
+
+    return sock;
+}
+
 /**
  * PRIVATE SEGMENT
  */
