@@ -11,9 +11,8 @@ ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     address.sin_addr.s_addr = htonl(INADDR_ANY);
-    std::printf("[+] creating server on address %d.%d.%d.%d:%u\n", 
-            address.sin_addr.s_addr & 0xF000, address.sin_addr.s_addr & 0x0F00, address.sin_addr.s_addr & 0x00F0, address.sin_addr.s_addr & 0x000F, 
-            port);
+    std::printf("[+] creating server on address ");
+    PrintSocket(address);
 
     std::printf("[+] create socket\n");
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);

@@ -6,6 +6,8 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
+#include "../SocketIp.hpp"
+
 #ifndef NULL
 #define NULL 0
 #endif
@@ -21,12 +23,10 @@
 
 const int default_port = 4888;
 
-typedef struct sockaddr_in sock_address;
-
 class ServerSockets {
     private:
         int sockfd, clientfd;
-        sock_address address;
+        sockaddress address;
         unsigned short port;
         unsigned int errors;
 
