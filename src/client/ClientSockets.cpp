@@ -5,17 +5,19 @@
 ClientSockets::ClientSockets(unsigned short port) : port(port) {
     errors = 0;
 
-    std::printf("create address to connection\n");
+    std::printf("[+] create address to connection\n");
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    std::printf("ip: ");
+    std::printf("[+] ip: ");
     PrintSocket(address);
 
+    std::printf("[+] create socket\n");
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);
 }
 
 int ClientSockets::client_send(const void *msg, int len, int flags) {
+    std::printf("[+] send message\n");
     ssize_t num = send(sockfd, msg, len, flags);
     if (num == -1) {
         perror("send: ");
@@ -25,15 +27,18 @@ int ClientSockets::client_send(const void *msg, int len, int flags) {
 }
 
 int ClientSockets::client_recv(void *buf, int len, int flags) {
+    std::printf("[+] wait message...\n");
     ssize_t num = recv(sockfd, buf, len, flags);
     if (num == -1) {
         perror("recv: ");
     }
 
+    std::printf("[+] get message\n");
     return num;
 }
 
 int ClientSockets::socket_connect() {
+    std::printf("[+] connect to server\n");
     return connect_to_serv(sockfd, (sockaddr *) &address, sizeof(address));
 }
 
