@@ -5,26 +5,38 @@
 ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
     errors = 0;
 
+    std::printf("---------------------------------- log -----------------------------\n");
+    std::printf("[+] init server\n");
+    std::printf("[+] init address for socket connection\n");
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     address.sin_addr.s_addr = htonl(INADDR_ANY);
+    std::printf("[+] creating server on address %d.%d.%d.%d:%d\n", 
+            address.sin_addr.s_addr & 0xF000, address.sin_addr.s_addr & 0x0F00, address.sin_addr.s_addr & 0x00F0, address.sin_addr.s_addr & 0x000F, 
+            port);
 
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);
+    std::printf("[+] created socket\n");
     create_bind(sockfd, (sockaddr *) &address, sizeof(address));
+    std::printf("[+] binded socket\n");
     change_listen(sockfd, len_qeue);
+    std::printf("[+] server listen port\n");
 }
 
 int ServerSockets::wait_accept() {
+    std::printf("[+] server wait connected client\n");
     clientfd = accept(sockfd, NULL, NULL);
     if (clientfd < 0) {
         perror("accept: ");
         errors = errors | ERRSERVACCP;
     }
 
+    std::printf("[+] client connected\n");
     return clientfd;
 }
 
 ssize_t ServerSockets::server_send(const void *msg, int len, int flags) {
+    std::printf("[+] server send message\n");
     ssize_t num = send(clientfd, msg, len, flags);
     if (num == -1) {
         perror("send: ");
@@ -35,12 +47,14 @@ ssize_t ServerSockets::server_send(const void *msg, int len, int flags) {
 }
 
 ssize_t ServerSockets::server_recv(void *buf, int len, int flags) {
+    std::printf("[+] server wait message...\n");
     ssize_t num = recv(clientfd, buf, len, flags);
     if (num == -1) {
         perror("recv: ");
         errors = errors | ERRSERVRECV;
     }
 
+    std::printf("[+] server get message\n");
     return num;
 }
 
