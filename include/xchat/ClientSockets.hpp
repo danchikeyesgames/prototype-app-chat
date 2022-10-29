@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 #include "../SocketIp.hpp"
 
@@ -29,6 +30,7 @@ class ClientSockets {
         int client_send(const void *msg, int len, int flags);
         int client_recv(void *buf, int len, int flags);
         int socket_connect();
+        int close_socket(int __fd);
 
     private:
         int create_socket(int domain, int type, int protocol);

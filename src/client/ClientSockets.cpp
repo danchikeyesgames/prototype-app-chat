@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstdlib>
 
 #include "../../include/xchat/ClientSockets.hpp"
 
@@ -40,6 +41,16 @@ int ClientSockets::client_recv(void *buf, int len, int flags) {
 int ClientSockets::socket_connect() {
     std::printf("[+] connect to server\n");
     return connect_to_serv(sockfd, (sockaddr *) &address, sizeof(address));
+}
+
+int close_socket(int __fd) {
+    std::printf("[+] close socket\n");
+    int err = close(__fd);
+    if (err < 0) {
+        perror("close socket: ");
+    }
+
+    return err;
 }
 
 /**
