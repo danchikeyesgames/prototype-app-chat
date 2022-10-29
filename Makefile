@@ -1,11 +1,11 @@
 CC=g++
 FLAGS=-std=c++11 -c
 
-SERVERFILES=src/server/ServerSockets.cpp src/server/ServerApp.cpp
-CLIENTFILES=src/client/ClientSockets.cpp src/client/ClientApp.cpp
+SERVERFILES=src/server/ServerSockets.cpp src/server/ServerApp.cpp src/SocketIp.cpp
+CLIENTFILES=src/client/ClientSockets.cpp src/client/ClientApp.cpp src/SocketIp.cpp
 
-SERVEROBJECTS=obj/ServerSockets.o obj/ServerApp.o
-CLIENTOBJECTS=obj/ClientSockets.o obj/ClientApp.o
+SERVEROBJECTS=obj/ServerSockets.o obj/ServerApp.o obj/SocketIp.o
+CLIENTOBJECTS=obj/ClientSockets.o obj/ClientApp.o obj/SocketIp.o
 
 build_client.elf: $(CLIENTOBJECTS) obj
 	$(CC) $(CLIENTOBJECTS) -o build_client.elf
@@ -30,6 +30,10 @@ obj/ClientApp.o: obj src/client/ClientApp.cpp
 obj:
 	mkdir obj
 
+# COMMON
+obj/SocketIp.o: src/SocketIp.cpp
+	$(CC) $(FLAGS) src/SocketIp.cpp -o obj/SocketIp.o
+
 # CLEAR
-clear: build_client.elf build_server.elf obj
+clean: build_client.elf build_server.elf obj
 	rm -rf obj build_client.elf build_server.elf
