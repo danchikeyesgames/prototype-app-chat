@@ -15,12 +15,12 @@ ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
             address.sin_addr.s_addr & 0xF000, address.sin_addr.s_addr & 0x0F00, address.sin_addr.s_addr & 0x00F0, address.sin_addr.s_addr & 0x000F, 
             port);
 
+    std::printf("[+] create socket\n");
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);
-    std::printf("[+] created socket\n");
+    std::printf("[+] bind socket\n");
     create_bind(sockfd, (sockaddr *) &address, sizeof(address));
-    std::printf("[+] binded socket\n");
-    change_listen(sockfd, len_qeue);
     std::printf("[+] server listen port\n");
+    change_listen(sockfd, len_qeue);
 }
 
 int ServerSockets::wait_accept() {
@@ -59,6 +59,7 @@ ssize_t ServerSockets::server_recv(void *buf, int len, int flags) {
 }
 
 int ServerSockets::close_socket(int __fd) {
+    std::printf("[+] close socket\n");
     int err = close(__fd);
     if (err < 0) {
         perror("close socket: ");
