@@ -7,14 +7,16 @@ TODO:
     for automatical build project
 
   * create improve API for sockets looking like classes
+
+  * create common class for iteraction with socket API
  
   * make message structure to transform packets between server and clients
+
+  * make multiclient connection using list
 
   * create threadpool API
 
   * design structure to save information of clients
-
-  * make multiclient connection using list
 
   * create queue messages is based on list
 
