@@ -7,6 +7,7 @@ int main() {
     char buf[1024] = "Hello!";
     char buf2[1024];
 
+    client.socket_connect();
     client.client_send(buf, 1024, 0);
     client.client_recv(buf2, 1024, 0);
 

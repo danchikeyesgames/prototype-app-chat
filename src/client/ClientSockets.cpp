@@ -3,6 +3,8 @@
 #include "../../include/xchat/ClientSockets.hpp"
 
 ClientSockets::ClientSockets(unsigned short port) : port(port) {
+    errors = 0;
+
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
@@ -28,14 +30,8 @@ int ClientSockets::client_recv(void *buf, int len, int flags) {
     return num;
 }
 
-int ClientSockets::connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len) {
-    int sock = connect(fd, addr, len);
-    if (sock == -1) {
-        perror("connect: ");
-        errors = errors | ERRCLNTCONN;
-    }
-
-    return sock;
+int ClientSockets::socket_connect() {
+    return connect_to_serv(sockfd, (sockaddr *) &address, sizeof(address));
 }
 
 /**
@@ -50,4 +46,14 @@ int ClientSockets::create_socket(int domain, int type, int protocol) {
     }
 
     return sckfd;
+}
+
+int ClientSockets::connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len) {
+    int sock = connect(fd, addr, len);
+    if (sock == -1) {
+        perror("connect: ");
+        errors = errors | ERRCLNTCONN;
+    }
+
+    return sock;
 }

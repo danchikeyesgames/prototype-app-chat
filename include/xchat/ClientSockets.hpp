@@ -28,10 +28,11 @@ class ClientSockets {
         ClientSockets(unsigned short port = default_port);
         int client_send(const void *msg, int len, int flags);
         int client_recv(void *buf, int len, int flags);
-        int connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len);
+        int socket_connect();
 
     private:
         int create_socket(int domain, int type, int protocol);
+        int connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len);
 };
 
 #endif      // __CLIENT_SOCKETS_HPP__
