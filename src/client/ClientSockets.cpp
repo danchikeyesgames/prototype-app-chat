@@ -32,6 +32,7 @@ int ClientSockets::connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t 
     int sock = connect(fd, addr, len);
     if (sock == -1) {
         perror("connect: ");
+        errors = errors | ERRCLNTCONN;
     }
 
     return sock;
@@ -45,6 +46,7 @@ int ClientSockets::create_socket(int domain, int type, int protocol) {
     int sckfd = socket(domain, type, protocol);
     if (sckfd == -1) {
         perror("socket: ");
+        errors = errors | ERRCLNTSOCK;
     }
 
     return sckfd;

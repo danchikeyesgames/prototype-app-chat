@@ -9,6 +9,10 @@
 #define NULL 0
 #endif
 
+#define SUCCESSFULL 0x0000
+#define ERRCLNTSOCK 0x0001
+#define ERRCLNTCONN 0x0002
+
 const int default_port = 4888;
 
 typedef struct sockaddr_in sockaddress;
