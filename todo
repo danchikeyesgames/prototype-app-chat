@@ -3,7 +3,7 @@ TODO:
 @ Realization console application: 
   - (READY) make simple socket connection 
  
-  * create configuration make-file
+  - (READY) create configuration make-file
     for automatical build project
 
   * create improve API for sockets looking like classes
