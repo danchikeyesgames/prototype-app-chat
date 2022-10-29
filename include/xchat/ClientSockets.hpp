@@ -5,16 +5,18 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-const int default_port = 4888;
-
 #ifndef NULL
 #define NULL 0
 #endif
 
+const int default_port = 4888;
+
+typedef struct sockaddr_in sockaddress;
+
 class ClientSockets {
     private:
         int sockfd;
-        struct sockaddr_in address;
+        sockaddress address;
         unsigned short port;
         unsigned int errors;
 
