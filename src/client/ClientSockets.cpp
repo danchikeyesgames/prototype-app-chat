@@ -8,7 +8,6 @@ ClientSockets::ClientSockets(unsigned short port) : port(port) {
     address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);
-    connect(sockfd, (struct sockaddr *) &address, sizeof(address));
 }
 
 int ClientSockets::client_send(const void *msg, int len, int flags) {
