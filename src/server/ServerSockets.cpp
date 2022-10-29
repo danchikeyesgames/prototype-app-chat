@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include "../../include/xchat/ServerSockets.hpp"
 
-ServerSockets::ServerSockets(unsigned short len_qeue, int port = default_port) : port(port) {
+ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
     errors = 0;
 
     address.sin_family = AF_INET;

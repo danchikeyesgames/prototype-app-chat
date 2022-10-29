@@ -31,7 +31,7 @@ class ServerSockets {
         unsigned int errors;
 
     public:
-        ServerSockets(unsigned short len_qeue, int port = default_port);
+        ServerSockets(unsigned short len_qeue, int _port = default_port);
         unsigned int isSockErr();
         unsigned int isAcceptErr();
         unsigned int isSendErr();
