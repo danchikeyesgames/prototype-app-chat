@@ -11,11 +11,21 @@ ClientSockets::ClientSockets(unsigned short port) : port(port) {
 }
 
 int ClientSockets::client_send(const void *msg, int len, int flags) {
-    return send(sockfd, msg, len, flags);
+    ssize_t num = send(sockfd, msg, len, flags);
+    if (num == -1) {
+        perror("send: ");
+    }
+
+    return num; 
 }
 
 int ClientSockets::client_recv(void *buf, int len, int flags) {
-    return recv(sockfd, buf, len, flags);
+    ssize_t num = recv(sockfd, buf, len, flags);
+    if (num == -1) {
+        perror("recv: ");
+    }
+
+    return num;
 }
 
 int ClientSockets::connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len) {
