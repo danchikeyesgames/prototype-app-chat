@@ -5,6 +5,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+const int default_port = 4888;
+
 #ifndef NULL
 #define NULL 0
 #endif
@@ -14,11 +16,15 @@ class ClientSockets {
         int sockfd;
         struct sockaddr_in address;
         unsigned short port;
+        unsigned int errors;
 
     public:
-        ClientSockets();
+        ClientSockets(unsigned short port = default_port);
         int client_send(const void *msg, int len, int flags);
         int client_recv(void *buf, int len, int flags);
+    
+    private:
+        int create_socket(int domain, int type, int protocol);
 };
 
 #endif      // __CLIENT_SOCKETS_HPP__
