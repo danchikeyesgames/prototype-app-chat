@@ -17,7 +17,7 @@
 
 #define FORMATCHR 0x01
 #define FORMATSTR 0x02
-#define FORMATU64 0x03
+#define FORMATU64 0x04
 
 
 #define MSGTOUI32(msg, format) ((*((uint32_t *) (&msg[28]))) = format)
