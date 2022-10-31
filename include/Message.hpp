@@ -21,7 +21,7 @@ class Message {
 
         void SaveMassegeData(char* data);
         void SaveMessageData(std::string& data);
-        void SaveMessageData(uint64_t* str);
+        void SaveMessageData(uint64_t* str, size_t size);
 
         
 };
