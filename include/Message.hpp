@@ -6,6 +6,20 @@
 
 #define MSGSIZE 1024
 
+#define CMMNDCONNECT    0x0
+#define CMMNDEXIT       0x1
+#define CMMNDSEND       0x2
+#define CMMNDLOADMSG    0x3
+
+#define CMMNDCNNCTNW 0x0
+#define CMMNDCNNCTCH 0x1
+
+
+#define FORMATCHR 0x01
+#define FORMATSTR 0x02
+#define FORMATU64 0x03
+
+
 class Message {
     private:
         unsigned int sizebuf = MSGSIZE;
