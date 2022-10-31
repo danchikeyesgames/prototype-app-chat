@@ -20,7 +20,7 @@
 #define FORMATU64 0x04
 
 
-#define MSGTOUI32(msg, format) ((*((uint32_t *) (&msg[28]))) = format)
+#define MSGTOUI32(msg, index, format) ((*((uint32_t *) (&msg[index]))) = format)
 
 class Message {
     private:
