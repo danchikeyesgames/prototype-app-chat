@@ -20,6 +20,8 @@
 #define FORMATU64 0x03
 
 
+#define MSGTOUI32(msg, format) ((*((uint32_t *) (&msg[28]))) = format)
+
 class Message {
     private:
         unsigned int sizebuf = MSGSIZE;

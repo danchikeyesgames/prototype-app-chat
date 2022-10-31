@@ -8,7 +8,7 @@ void Message::SaveMessageName(char* str) {
 
     memcpy(msg_send + (size_t) 32, str, strlen(str));
 
-    msg_send[28] = 1;
+    MSGTOUI32(msg_send, FORMATCHR);
 }
 
 void Message::SaveMessageName(std::string& str) {
@@ -18,7 +18,7 @@ void Message::SaveMessageName(std::string& str) {
 
     memcpy(msg_send + (size_t) 32, str.c_str(), str.size());
 
-    msg_send[29] = 1;
+    MSGTOUI32(msg_send, FORMATSTR);
 }
 
 void Message::SaveMessageName(uint64_t id) {
@@ -28,7 +28,7 @@ void Message::SaveMessageName(uint64_t id) {
 
     memcpy(msg_send + (size_t) 32, &id, sizeof(id));
 
-    msg_send[30] = 1;
+    MSGTOUI32(msg_send, FORMATU64);
 }
 
 void Message::SaveMassegeData(char* data) {
