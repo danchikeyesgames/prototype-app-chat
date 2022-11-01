@@ -19,6 +19,18 @@
 #define FORMATSTR 0x02
 #define FORMATU64 0x04
 
+#define INDEXSIZE           0
+#define INDEXID             4
+#define INDEXCONTROLPRIMAR  8
+#define INDEXCONTROLSECOND  16
+#define INDEXFORMATDATA256  20
+#define INDEXFORMATDATA256  22
+#define INDEXDATASIZE       24
+#define INDEXFORMATNAME     28
+#define INDEXNAME           32
+#define INDEXNAMESIZE       64
+#define INDEXDATA256        256
+#define INDEXDATA512        512
 
 #define MSGTOUI32(msg, index, format) ((*((uint32_t *) (&msg[index]))) = format)
 
