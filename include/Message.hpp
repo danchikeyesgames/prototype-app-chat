@@ -54,6 +54,8 @@ class Message {
         void SaveID(uint32_t id);
         void SaveSize(uint32_t size);
 
+        void SaveMessage(void* buffer);
+
         
 };
 

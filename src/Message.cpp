@@ -92,3 +92,9 @@ void Message::SaveID(uint32_t id) {
 void Message::SaveSize(uint32_t size) {
     MSGTOUI32(msg_send, INDEXSIZE, size);
 }
+
+void Message::SaveMessage(void* buffer) {
+    memset(msg, 0, MSGSIZE);
+
+    memcpy(msg, buffer, MSGSIZE);
+}
