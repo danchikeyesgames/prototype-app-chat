@@ -84,3 +84,11 @@ void Message::SaveMessageData(uint64_t* data, size_t size) {
         MSGTOUI32(msg_send, INDEXFORMATDATA256, FORMATU64);
     }
 }
+
+void Message::SaveID(uint32_t id) {
+    MSGTOUI32(msg_send, INDEXID, id);
+}
+
+void Message::SaveSize(uint32_t size) {
+    MSGTOUI32(msg_send, INDEXSIZE, size);
+}

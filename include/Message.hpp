@@ -51,6 +51,9 @@ class Message {
         void SaveMessageData(std::string& data);
         void SaveMessageData(uint64_t* str, size_t size);
 
+        void SaveID(uint32_t id);
+        void SaveSize(uint32_t size);
+
         
 };
 
