@@ -58,6 +58,7 @@ class Message {
         void SaveMessage(void* buffer);
 
         void SavePrimary(uint32_t primary);
+        void SavePrimaryTwo(uint32_t primary);
         void SaveSecondary(uint32_t secondary);
 
         void*       LoadMessageName();

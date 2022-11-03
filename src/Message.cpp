@@ -103,6 +103,10 @@ void Message::SavePrimary(uint32_t primary) {
     MSGTOUI32(msg_send, INDEXCONTROLPRIMAR, primary);
 }
 
+void Message::SavePrimaryTwo(uint32_t primary) {
+    MSGTOUI32(msg_send, INDEXCONTROLPRIMAR + 4, primary);
+}
+
 void Message::SaveSecondary(uint32_t secondary) {
     MSGTOUI32(msg_send, INDEXCONTROLSECOND, secondary);
 }
