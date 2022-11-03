@@ -99,6 +99,14 @@ void Message::SaveMessage(void* buffer) {
     memcpy(msg, buffer, MSGSIZE);
 }
 
+void Message::SavePrimary(uint32_t primary) {
+    MSGTOUI32(msg_send, INDEXCONTROLPRIMAR, primary);
+}
+
+void Message::SaveSecondary(uint32_t secondary) {
+    MSGTOUI32(msg_send, INDEXCONTROLSECOND, secondary);
+}
+
 void* Message::LoadMessageName() {
     return &msg[INDEXNAME];
 }

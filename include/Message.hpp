@@ -43,6 +43,7 @@ class Message {
 
     public:
         virtual void SaveMessageCommand(uint32_t command, uint32_t second_command) = 0;
+        virtual void GetMessageCommand(uint32_t* command, uint32_t* second_command) = 0;
 
         void SaveMessageName(char* str);
         void SaveMessageName(std::string& str);
@@ -55,6 +56,9 @@ class Message {
         void SaveID(uint32_t id);
         void SaveSize(uint32_t size);
         void SaveMessage(void* buffer);
+
+        void SavePrimary(uint32_t primary);
+        void SaveSecondary(uint32_t secondary);
 
         void*       LoadMessageName();
         uint32_t    GetNameFormat();
