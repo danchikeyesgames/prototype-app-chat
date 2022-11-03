@@ -57,10 +57,6 @@ class Message {
         void SaveSize(uint32_t size);
         void SaveMessage(void* buffer);
 
-        void SavePrimary(uint32_t primary);
-        void SavePrimaryTwo(uint32_t primary);
-        void SaveSecondary(uint32_t secondary);
-
         void*       LoadMessageName();
         uint32_t    GetNameFormat();
         void*       LoadMassegeData();
@@ -69,6 +65,16 @@ class Message {
         uint32_t    LoadSizeData();
 
         void ClearMsg();
+
+    protected:
+        void SavePrimary(uint32_t primary);
+        void SavePrimaryTwo(uint32_t primary);
+        void SaveSecondary(uint32_t secondary);
+
+        uint32_t GetPrimary();
+        uint32_t GetPrimaryTwo();
+        uint32_t GetSecondary();
+
 };
 
 #endif          // __MESSAGE_HPP__

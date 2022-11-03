@@ -99,18 +99,6 @@ void Message::SaveMessage(void* buffer) {
     memcpy(msg, buffer, MSGSIZE);
 }
 
-void Message::SavePrimary(uint32_t primary) {
-    MSGTOUI32(msg_send, INDEXCONTROLPRIMAR, primary);
-}
-
-void Message::SavePrimaryTwo(uint32_t primary) {
-    MSGTOUI32(msg_send, INDEXCONTROLPRIMAR + 4, primary);
-}
-
-void Message::SaveSecondary(uint32_t secondary) {
-    MSGTOUI32(msg_send, INDEXCONTROLSECOND, secondary);
-}
-
 void* Message::LoadMessageName() {
     return &msg[INDEXNAME];
 }
@@ -141,4 +129,32 @@ uint32_t Message::LoadSizeData() {
 
 void Message::ClearMsg() {
     memset(msg_send, 0, MSGSIZE);
+}
+
+/**
+**** PROTECTED SEGMENT
+*/
+
+void Message::SavePrimary(uint32_t primary) {
+    MSGTOUI32(msg_send, INDEXCONTROLPRIMAR, primary);
+}
+
+void Message::SavePrimaryTwo(uint32_t primary) {
+    MSGTOUI32(msg_send, INDEXCONTROLPRIMAR + 4, primary);
+}
+
+void Message::SaveSecondary(uint32_t secondary) {
+    MSGTOUI32(msg_send, INDEXCONTROLSECOND, secondary);
+}
+
+uint32_t Message::GetPrimary() {
+    return msg_send[INDEXCONTROLPRIMAR];
+}
+
+uint32_t Message::GetPrimaryTwo() {
+    return msg_send[INDEXCONTROLPRIMAR + 4];
+}
+
+uint32_t Message::GetSecondary() {
+    return msg_send[INDEXCONTROLSECOND];
 }
