@@ -8,7 +8,7 @@ TODO:
 
   - (READY) create improve API for sockets looking like classes
  
-  * make message structure to transform packets between server and clients
+  - (READY) make message structure to transform packets between server and clients
   
   * create common class for sockets and messages classes
 
