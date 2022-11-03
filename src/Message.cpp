@@ -98,3 +98,35 @@ void Message::SaveMessage(void* buffer) {
 
     memcpy(msg, buffer, MSGSIZE);
 }
+
+void* Message::LoadMessageName() {
+    return &msg[INDEXNAME];
+}
+
+uint32_t Message::GetNameFormat() {
+    return GETMSGIND(msg, INDEXFORMATNAME);
+}
+
+void* Message::LoadMassegeData() {
+    if (GETMSGIND(msg, INDEXFORMATDATA256) > 0) {
+        return &msg[INDEXFORMATDATA256];
+    } else if (GETMSGIND(msg, INDEXFORMATDATA512) > 0) {
+        return &msg[INDEXFORMATDATA512];
+    }
+}
+
+uint32_t Message::LoadID() {
+    return GETMSGIND(msg, INDEXID);
+}
+
+uint32_t Message::LoadSize() {
+    return GETMSGIND(msg, INDEXSIZE);
+}
+
+uint32_t Message::LoadSizeData() {
+    return GETMSGIND(msg, INDEXDATASIZE);
+}
+
+void Message::ClearMsg() {
+    memset(msg_send, 0, MSGSIZE);
+}

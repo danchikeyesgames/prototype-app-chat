@@ -33,6 +33,7 @@
 #define INDEXDATA512        512
 
 #define MSGTOUI32(msg, index, format) ((*((uint32_t *) (&msg[index]))) = format)
+#define GETMSGIND(msg, index) ((*((uint32_t *) (&msg[index]))))
 
 class Message {
     private:
@@ -53,10 +54,16 @@ class Message {
 
         void SaveID(uint32_t id);
         void SaveSize(uint32_t size);
-
         void SaveMessage(void* buffer);
 
-        
+        void*       LoadMessageName();
+        uint32_t    GetNameFormat();
+        void*       LoadMassegeData();
+        uint32_t    LoadID();
+        uint32_t    LoadSize();
+        uint32_t    LoadSizeData();
+
+        void ClearMsg();
 };
 
 #endif          // __MESSAGE_HPP__
