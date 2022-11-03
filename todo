@@ -10,7 +10,7 @@ TODO:
  
   * make message structure to transform packets between server and clients
   
-  * create common class for iteraction with socket API
+  * create common class for sockets and messages classes
 
   * make multiclient connection using list
 
