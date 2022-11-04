@@ -67,6 +67,9 @@ class Message {
         void ClearMsg();
 
     protected:
+        void* GetMessageSend();
+        void* GetMessage();
+
         void SavePrimary(uint32_t primary);
         void SavePrimaryTwo(uint32_t primary);
         void SaveSecondary(uint32_t secondary);

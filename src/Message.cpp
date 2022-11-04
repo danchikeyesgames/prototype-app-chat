@@ -158,3 +158,11 @@ uint32_t Message::GetPrimaryTwo() {
 uint32_t Message::GetSecondary() {
     return msg_send[INDEXCONTROLSECOND];
 }
+
+void* Message::GetMessageSend() {
+    return msg_send;
+}
+        
+void* Message::GetMessage() {
+    return msg;
+}
