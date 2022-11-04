@@ -25,7 +25,7 @@ const int default_port = 4888;
 
 class ServerSockets {
     private:
-        int sockfd, clientfd;
+        int sockfd;
         sockaddress address;
         unsigned short port;
         unsigned int errors;
@@ -37,7 +37,9 @@ class ServerSockets {
         unsigned int isSendErr();
         unsigned int isRecvErr();
 
-    public:                             // protected
+    protected:                             // protected
+        int clientfd;
+        
         int     wait_accept();
         ssize_t server_send(const void *msg, int len, int flags);
         ssize_t server_recv(void *buf, int len, int flags);
