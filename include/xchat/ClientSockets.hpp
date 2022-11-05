@@ -20,7 +20,6 @@ const int default_port = 4888;
 
 class ClientSockets {
     private:
-        int sockfd;
         sockaddress address;
         unsigned short port;
         unsigned int errors;
@@ -35,6 +34,9 @@ class ClientSockets {
     private:
         int create_socket(int domain, int type, int protocol);
         int connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len);
+
+    protected:
+        int sockfd;
 };
 
 #endif      // __CLIENT_SOCKETS_HPP__
