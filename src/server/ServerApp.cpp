@@ -1,17 +1,21 @@
 #include <iostream>
 
-#include "../../include/xchat/ServerSockets.hpp"
+#include "../../include/xchat/Server.hpp"
 
 
 int main() {
-    ServerSockets server = 1;
+    Server myserver = 4488;
     char buf[1024];
+    void* ptr = NULL;
+    
+    myserver.WaitClient();
+    myserver.recvMessage();
+    ptr = myserver.LoadMassegeData();
 
-    server.wait_accept();
+    myserver.SaveMessageData((char *) ptr);
+    myserver.SaveMessageCommand(0, 0);
+    myserver.SendMessage();
 
-    server.server_recv(buf, 1024, 0);
-    server.server_send(buf, 1024, 0);
-    std::cout << buf << std::endl;
-
+    myserver.CloseSocket();
     return 0;
 }

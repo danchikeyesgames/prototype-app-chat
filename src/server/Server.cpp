@@ -12,7 +12,7 @@ void Server::GetMessageCommand(uint32_t* command, uint32_t* second_command) {
 
 void Server::SendMessage() {
     void* msg = GetMessageSend();
-
+    
     server_send(msg, MSGSIZE, 0);
 }
 

@@ -32,7 +32,7 @@ void Message::SaveMessageName(uint64_t id) {
     MSGTOUI32(msg_send, INDEXNAMESIZE, sizeof(id));
 }
 
-void Message::SaveMassegeData(char* data) {
+void Message::SaveMessageData(char* data) {
     memset(msg_send + INDEXDATA256, 0, (size_t) 768);
 
     if (strlen(data) > 256 && strlen(data) <= 512) {
