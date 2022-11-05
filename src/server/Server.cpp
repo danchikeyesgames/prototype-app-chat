@@ -1,7 +1,7 @@
 #include "../../include/xchat/Server.hpp"
 
 void Server::SaveMessageCommand(uint32_t command, uint32_t second_command) {
-    SavePrimary(command);
+    SavePrimaryTwo(command);
     SaveSecondary(second_command);
 }
     
