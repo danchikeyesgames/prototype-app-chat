@@ -6,6 +6,8 @@
 
 
 class Client : public ClientSockets, public Message {
+    private:
+        uint64_t client_id;
     public:
         void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
         void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;
