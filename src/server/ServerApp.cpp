@@ -10,7 +10,7 @@ int main() {
     
     myserver.WaitClient();
     myserver.recvMessage();
-    ptr = myserver.LoadMassegeData();
+    ptr = myserver.LoadMessageData();
 
     myserver.SaveMessageData((char *) ptr);
     myserver.SaveMessageCommand(0, 0);

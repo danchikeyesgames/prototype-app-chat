@@ -59,7 +59,7 @@ class Message {
 
         void*       LoadMessageName();
         uint32_t    GetNameFormat();
-        void*       LoadMassegeData();
+        void*       LoadMessageData();
         uint32_t    LoadID();
         uint32_t    LoadSize();
         uint32_t    LoadSizeData();

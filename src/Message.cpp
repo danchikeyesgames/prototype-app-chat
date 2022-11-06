@@ -107,12 +107,12 @@ uint32_t Message::GetNameFormat() {
     return GETMSGIND(msg, INDEXFORMATNAME);
 }
 
-void* Message::LoadMassegeData() {
+void* Message::LoadMessageData() {
     if (GETMSGIND(msg, INDEXFORMATDATA256) > 0) {
         return &msg[INDEXFORMATDATA256];
     } else if (GETMSGIND(msg, INDEXFORMATDATA512) > 0) {
         return &msg[INDEXFORMATDATA512];
-    }
+    } else return NULL;
 }
 
 uint32_t Message::LoadID() {
