@@ -33,7 +33,9 @@
 #define INDEXDATA512        512
 
 #define MSGTOUI32(msg, index, format) ((*((uint32_t *) (&msg[index]))) = format)
+#define MSGTOUI16(msg, index, format) ((*((uint16_t *) (&msg[index]))) = format)
 #define GETMSGIND(msg, index) ((*((uint32_t *) (&msg[index]))))
+#define GETMSGIND16(msg, index) ((*((uint16_t *) (&msg[index]))))
 
 class Message {
     private:

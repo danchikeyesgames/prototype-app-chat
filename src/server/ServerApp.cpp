@@ -12,6 +12,7 @@ int main() {
     myserver.recvMessage();
     ptr = myserver.LoadMessageData();
 
+    std::cout << ":" << ((char *) ptr)[0] << ":" << ((int *) ptr)[0] << "\n";
     std::cout << "Message: " << (char *) ptr << "\n";
     myserver.SaveMessageData((char *) ptr);
     myserver.SaveMessageCommand(0, 0);

@@ -37,15 +37,15 @@ void Message::SaveMessageData(char* data) {
 
     if (strlen(data) > 256 && strlen(data) <= 512) {
         memcpy(msg_send + (size_t) 512, data, strlen(data));
-        MSGTOUI32(msg_send, INDEXFORMATDATA512, FORMATCHR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA512, FORMATCHR);
     } else if (strlen(data) <= 256) {
         memcpy(msg_send + (size_t) 256, data, strlen(data));
-        MSGTOUI32(msg_send, INDEXFORMATDATA256, FORMATCHR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA256, FORMATCHR);
     } else {
         memcpy(msg_send + (size_t) 512, data, (size_t) 512);
         memcpy(msg_send + (size_t) 256, data, (size_t) 256);
-        MSGTOUI32(msg_send, INDEXFORMATDATA512, FORMATCHR);
-        MSGTOUI32(msg_send, INDEXFORMATDATA256, FORMATCHR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA512, FORMATCHR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA256, FORMATCHR);
     }
 
     MSGTOUI32(msg_send, INDEXDATASIZE, strlen(data));
@@ -56,15 +56,15 @@ void Message::SaveMessageData(std::string& data) {
 
     if (data.size() > 256 && data.size() <= 512) {
         memcpy(msg_send + (size_t) 512, data.c_str(), data.size());
-        MSGTOUI32(msg_send, INDEXFORMATDATA512, FORMATSTR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA512, FORMATSTR);
     } else if (data.size() <= 256) {
         memcpy(msg_send + (size_t) 256, data.c_str(), data.size());
-        MSGTOUI32(msg_send, INDEXFORMATDATA256, FORMATSTR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA256, FORMATSTR);
     } else {
         memcpy(msg_send + (size_t) 512, data.c_str(), (size_t) 512);
         memcpy(msg_send + (size_t) 256, data.c_str(), (size_t) 256);
-        MSGTOUI32(msg_send, INDEXFORMATDATA512, FORMATSTR);
-        MSGTOUI32(msg_send, INDEXFORMATDATA256, FORMATSTR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA512, FORMATSTR);
+        MSGTOUI16(msg_send, INDEXFORMATDATA256, FORMATSTR);
     }
 }
 
@@ -73,15 +73,15 @@ void Message::SaveMessageData(uint64_t* data, size_t size) {
 
     if (size > 256 && size <= 512) {
         memcpy(msg_send + (size_t) 512, data, size);
-        MSGTOUI32(msg_send, INDEXFORMATDATA512, FORMATU64);
+        MSGTOUI16(msg_send, INDEXFORMATDATA512, FORMATU64);
     } else if (size <= 256) {
         memcpy(msg_send + (size_t) 256, data, size);
-        MSGTOUI32(msg_send, INDEXFORMATDATA256, FORMATU64);
+        MSGTOUI16(msg_send, INDEXFORMATDATA256, FORMATU64);
     } else {
         memcpy(msg_send + (size_t) 512, data, (size_t) 512);
         memcpy(msg_send + (size_t) 256, data, (size_t) 256);
-        MSGTOUI32(msg_send, INDEXFORMATDATA512, FORMATU64);
-        MSGTOUI32(msg_send, INDEXFORMATDATA256, FORMATU64);
+        MSGTOUI16(msg_send, INDEXFORMATDATA512, FORMATU64);
+        MSGTOUI16(msg_send, INDEXFORMATDATA256, FORMATU64);
     }
 }
 
@@ -108,10 +108,10 @@ uint32_t Message::GetNameFormat() {
 }
 
 void* Message::LoadMessageData() {
-    if (GETMSGIND(msg, INDEXFORMATDATA256) > 0) {
-        return &msg[INDEXFORMATDATA256];
-    } else if (GETMSGIND(msg, INDEXFORMATDATA512) > 0) {
-        return &msg[INDEXFORMATDATA512];
+    if (GETMSGIND16(msg, INDEXFORMATDATA256) > 0) {
+        return &msg[INDEXDATA256];
+    } else if (GETMSGIND16(msg, INDEXFORMATDATA512) > 0) {
+        return &msg[INDEXDATA512];
     } else return NULL;
 }
 
