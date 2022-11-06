@@ -148,15 +148,15 @@ void Message::SaveSecondary(uint32_t secondary) {
 }
 
 uint32_t Message::GetPrimary() {
-    return msg_send[INDEXCONTROLPRIMAR];
+    return msg[INDEXCONTROLPRIMAR];
 }
 
 uint32_t Message::GetPrimaryTwo() {
-    return msg_send[INDEXCONTROLPRIMAR + 4];
+    return msg[INDEXCONTROLPRIMAR + 4];
 }
 
 uint32_t Message::GetSecondary() {
-    return msg_send[INDEXCONTROLSECOND];
+    return msg[INDEXCONTROLSECOND];
 }
 
 void* Message::GetMessageSend() {

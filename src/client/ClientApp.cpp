@@ -12,7 +12,7 @@ int main() {
     c.SaveMessageCommand(0, 0);
     std::cout << "My message: " << buf << "\n";
     c.SendMessage();
-    c.recvMessage();
+    c.RecvMessage();
 
     pointer = (char *) c.LoadMessageData();
 

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "../../include/xchat/Client.hpp"
 
 void Client::SaveMessageCommand(uint32_t command, uint32_t second_command) {
@@ -17,7 +19,7 @@ void Client::SendMessage() {
     client_send(msg, MSGSIZE, 0);
 }
 
-void Client::recvMessage() {
+void Client::RecvMessage() {
     uint8_t buffer[MSGSIZE];
 
     client_recv(buffer, MSGSIZE, 0);
@@ -29,7 +31,21 @@ void Client::CloseSocket() {
 }
 
 void Client::Connect() {
+    uint32_t id, command, sec_command, myid;
     socket_connect();
+    void* ptr = NULL;
+
+    RecvMessage();
+    GetMessageCommand(&command, &sec_command);
+    id = LoadID();
+
+    if (command == CMDSENDID && id == 0) {
+        ptr = LoadMessageData();
+        myid = ((uint32_t *) ptr)[0];
+        std::cout << "[+] Get new id for client: " << myid << "\n";
+    }
+
+    client_id = myid;
 }
 
 Client::Client(int port) : ClientSockets(port), Message() {}

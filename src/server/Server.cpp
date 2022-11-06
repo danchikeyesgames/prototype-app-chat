@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "../../include/xchat/Server.hpp"
 
 void Server::SaveMessageCommand(uint32_t command, uint32_t second_command) {
@@ -25,7 +27,16 @@ void Server::recvMessage() {
 }
 
 void Server::WaitClient() {
+    uint32_t id = 167;
+
     wait_accept();
+
+    ClearMsg();
+    SaveID(server_id);
+    SaveMessageCommand(CMDSENDID, 0);
+    std::cout << "[+] Send id to client: " << id << std::endl;
+    SaveMessageData(&id, sizeof(id));
+    SendMessage();
 }
 
 void Server::CloseSocket() {

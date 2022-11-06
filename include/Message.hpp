@@ -14,6 +14,8 @@
 #define CMMNDCNNCTNW 0x0
 #define CMMNDCNNCTCH 0x1
 
+#define CMDSENDID 0x01
+#define CMDMSG    0x02
 
 #define FORMATCHR 0x01
 #define FORMATSTR 0x02
