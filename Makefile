@@ -2,10 +2,10 @@ CC=g++
 FLAGS=-std=c++11 -c
 
 SERVERFILES=src/server/ServerSockets.cpp src/server/ServerApp.cpp src/SocketIp.cpp src/Message.cpp src/server/Server.cpp
-CLIENTFILES=src/client/ClientSockets.cpp src/client/ClientApp.cpp src/SocketIp.cpp src/Message.cpp
+CLIENTFILES=src/client/ClientSockets.cpp src/client/ClientApp.cpp src/SocketIp.cpp src/Message.cpp src/client/Client.cpp
 
 SERVEROBJECTS=obj/ServerSockets.o obj/ServerApp.o obj/SocketIp.o obj/Message.o obj/Server.o
-CLIENTOBJECTS=obj/ClientSockets.o obj/ClientApp.o obj/SocketIp.o obj/Message.o
+CLIENTOBJECTS=obj/ClientSockets.o obj/ClientApp.o obj/SocketIp.o obj/Message.o obj/Client.o
 
 build_client.elf: $(CLIENTOBJECTS) obj
 	$(CC) $(CLIENTOBJECTS) -o build_client.elf
@@ -29,11 +29,14 @@ obj/ClientSockets.o: obj src/client/ClientSockets.cpp
 
 obj/ClientApp.o: obj src/client/ClientApp.cpp
 	$(CC) $(FLAGS) src/client/ClientApp.cpp -o obj/ClientApp.o
-	
-obj:
-	mkdir obj
+
+obj/Client.o: src/client/Client.cpp
+	$(CC) $(FLAGS) src/client/Client.cpp -o obj/Client.o
+
 
 # COMMON
+obj:
+	mkdir obj
 
 obj/Message.o: obj src/Message.cpp
 	$(CC) $(FLAGS) src/Message.cpp -o obj/Message.o
