@@ -43,7 +43,7 @@ int ClientSockets::socket_connect() {
     return connect_to_serv(sockfd, (sockaddr *) &address, sizeof(address));
 }
 
-int close_socket(int __fd) {
+int ClientSockets::close_socket(int __fd) {
     std::printf("[+] close socket\n");
     int err = close(__fd);
     if (err < 0) {
