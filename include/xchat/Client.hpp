@@ -6,16 +6,18 @@
 
 
 class Client : public ClientSockets, public Message {
-    void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
-    void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;
+    public:
+        void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
+        void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;
 
-    void SendMessage();
-    void recvMessage();
-    void WaitClient();
-    void CloseSocket();
+        void Connect();
+        void SendMessage();
+        void recvMessage();
+        void WaitClient();
+        void CloseSocket();
 
-    Client(int port);
-    Client();
+        Client(int port);
+        Client();
 };
 
 

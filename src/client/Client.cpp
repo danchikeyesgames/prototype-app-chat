@@ -27,6 +27,10 @@ void Client::CloseSocket() {
     close_socket(sockfd);
 }
 
+void Client::Connect() {
+    socket_connect();
+}
+
 Client::Client(int port) : ClientSockets(port), Message() {}
 
 Client::Client() : ClientSockets(), Message() {}

@@ -1,18 +1,22 @@
 #include <iostream>
 
-#include "../../include/xchat/ClientSockets.hpp"
+#include "../../include/xchat/Client.hpp"
 
 int main() {
-    ClientSockets client;
-    char buf[1024] = "Hello!";
-    char buf2[1024];
+    Client c;
+    char buf[1024] = "Hellow!";
+    char* pointer = NULL;
 
-    client.socket_connect();
-    client.client_send(buf, 1024, 0);
-    client.client_recv(buf2, 1024, 0);
+    c.Connect();
+    c.SaveMessageData(buf);
+    c.SaveMessageCommand(0, 0);
+    std::cout << "My message: " << buf << "\n";
+    c.SendMessage();
+    c.recvMessage();
 
-    std::cout << "OUR MSG: " << buf << "\n";
-    std::cout << "RECV MASG: " << buf2 << std::endl;
+    pointer = (char *) c.LoadMessageData();
+
+    std::cout << pointer << "\n";
 
     return 0;
 }

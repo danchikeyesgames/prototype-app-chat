@@ -26,6 +26,8 @@ class ClientSockets {
 
     public:
         ClientSockets(unsigned short port = default_port);
+    
+    protected:
         int client_send(const void *msg, int len, int flags);
         int client_recv(void *buf, int len, int flags);
         int socket_connect();
