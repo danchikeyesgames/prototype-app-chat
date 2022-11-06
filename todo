@@ -12,6 +12,8 @@ TODO:
   
   - (READY) create common class that to combinate the sockets and messages classes
 
+  * write function to server that give id any connected client
+
   * make multiclient connection using list
 
   * create threadpool API
