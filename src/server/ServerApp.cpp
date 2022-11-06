@@ -4,7 +4,7 @@
 
 
 int main() {
-    Server myserver = 4488;
+    Server myserver = 4888;
     char buf[1024];
     void* ptr = NULL;
     
@@ -12,6 +12,7 @@ int main() {
     myserver.recvMessage();
     ptr = myserver.LoadMessageData();
 
+    std::cout << "Message: " << (char *) ptr << "\n";
     myserver.SaveMessageData((char *) ptr);
     myserver.SaveMessageCommand(0, 0);
     myserver.SendMessage();

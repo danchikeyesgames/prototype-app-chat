@@ -17,6 +17,7 @@ int main() {
     pointer = (char *) c.LoadMessageData();
 
     std::cout << pointer << "\n";
-
+    
+    c.CloseSocket();
     return 0;
 }
