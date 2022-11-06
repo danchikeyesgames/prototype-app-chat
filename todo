@@ -10,7 +10,7 @@ TODO:
  
   - (READY) make message structure to transform packets between server and clients
   
-  * create common class for sockets and messages classes
+  - (READY) create common class that to combinate the sockets and messages classes
 
   * make multiclient connection using list
 
