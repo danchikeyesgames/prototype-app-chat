@@ -14,11 +14,13 @@ TODO:
 
   - (READY) write function to server that give id any connected client
 
+  * create input name for client
+
+  * design structure to save information of clients
+  
   * make multiclient connection using list
 
   * create threadpool API
-
-  * design structure to save information of clients
 
   * create queue messages is based on list
 
