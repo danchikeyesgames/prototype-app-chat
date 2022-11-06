@@ -49,11 +49,11 @@ class Message {
 
         void SaveMessageName(char* str);
         void SaveMessageName(std::string& str);
-        void SaveMessageName(uint64_t id);
+        void SaveMessageName(uint32_t id);
 
         void SaveMessageData(char* data);
         void SaveMessageData(std::string& data);
-        void SaveMessageData(uint64_t* str, size_t size);
+        void SaveMessageData(uint32_t* str, size_t size);
 
         void SaveID(uint32_t id);
         void SaveSize(uint32_t size);

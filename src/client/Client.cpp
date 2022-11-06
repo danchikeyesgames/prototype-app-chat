@@ -11,6 +11,7 @@ void Client::GetMessageCommand(uint32_t* command, uint32_t* second_command) {
 }
 
 void Client::SendMessage() {
+    SaveID(client_id);
     void* msg = GetMessageSend();
 
     client_send(msg, MSGSIZE, 0);

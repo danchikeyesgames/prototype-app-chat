@@ -6,7 +6,7 @@
 
 class Server : public ServerSockets, public Message {
     private:
-        uint64_t server_id = 0;
+        uint32_t server_id = 0;
     public:
         void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
         void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;

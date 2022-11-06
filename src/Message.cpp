@@ -22,7 +22,7 @@ void Message::SaveMessageName(std::string& str) {
     MSGTOUI32(msg_send, INDEXNAMESIZE, str.size());
 }
 
-void Message::SaveMessageName(uint64_t id) {
+void Message::SaveMessageName(uint32_t id) {
     memset(msg_send + INDEXNAME, 0, (size_t) 32);
     memset(msg_send + INDEXFORMATNAME, 0, (size_t) 4);
 
@@ -68,7 +68,7 @@ void Message::SaveMessageData(std::string& data) {
     }
 }
 
-void Message::SaveMessageData(uint64_t* data, size_t size) {
+void Message::SaveMessageData(uint32_t* data, size_t size) {
     memset(msg_send + INDEXDATA256, 0, (size_t) 768);
 
     if (size > 256 && size <= 512) {
