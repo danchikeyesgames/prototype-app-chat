@@ -12,6 +12,7 @@ class Client : public ClientSockets, public Message {
         void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
         void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;
 
+        void InputName(char* name, uint32_t new_acc);
         void Connect();
         void SendMessage();
         void RecvMessage();

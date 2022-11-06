@@ -43,6 +43,10 @@ void Server::CloseSocket() {
     close_socket(clientfd);
 }
 
+void Server::SaveNewClient() {
+    
+}
+
 Server::Server(int port) : ServerSockets(1, port), Message() {}
 
 Server::Server() : ServerSockets(1), Message() {}

@@ -7,16 +7,24 @@ int main() {
     Server myserver = 4888;
     char buf[1024];
     void* ptr = NULL;
-    
+    uint32_t one, two;
+
+
     myserver.WaitClient();
     myserver.recvMessage();
-    ptr = myserver.LoadMessageData();
+    
+    myserver.GetMessageCommand(&one, &two);
 
-    std::cout << ":" << ((char *) ptr)[0] << ":" << ((int *) ptr)[0] << "\n";
-    std::cout << "Message: " << (char *) ptr << "\n";
-    myserver.SaveMessageData((char *) ptr);
-    myserver.SaveMessageCommand(0, 0);
-    myserver.SendMessage();
+    if (one == CMMNDCONNECT && two == CMMNDCNNCTNW) {
+        ptr = myserver.LoadMessageData();
+
+        std::cout << "Message: " << (char *) ptr << "\n";
+        myserver.SaveMessageData((char *) ptr);
+        myserver.SaveMessageCommand(0, 0);
+        myserver.SendMessage();
+    }
+
+    
 
     myserver.CloseSocket();
     return 0;

@@ -48,6 +48,13 @@ void Client::Connect() {
     client_id = myid;
 }
 
+void Client::InputName(char* name, uint32_t new_acc) {
+    std::cout << "[+] Send nickname to server: " << name << "\n";
+    SaveMessageCommand(CMMNDCONNECT, new_acc);
+    SaveMessageData(name);
+    SendMessage();
+}
+
 Client::Client(int port) : ClientSockets(port), Message() {}
 
 Client::Client() : ClientSockets(), Message() {}

@@ -4,19 +4,18 @@
 
 int main() {
     Client c;
-    char buf[1024] = "Hellow!";
+    char buf[1024] = "danchik";
     char* pointer = NULL;
 
     c.Connect();
-    c.SaveMessageData(buf);
-    c.SaveMessageCommand(0, 0);
-    std::cout << "My message: " << buf << "\n";
+    c.InputName(buf, CMMNDCNNCTNW);
+    std::cout << "My name: " << buf << "\n";
     c.SendMessage();
     c.RecvMessage();
 
     pointer = (char *) c.LoadMessageData();
 
-    std::cout << pointer << "\n";
+    std::cout << "echo: " << pointer << "\n";
     
     c.CloseSocket();
     return 0;
