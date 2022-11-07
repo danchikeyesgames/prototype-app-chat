@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "../include/Threadpool.hpp"
 
 struct Threadpool::pth_work {
@@ -20,6 +22,8 @@ Threadpool::Threadpool(size_t num) {
     thread = num;
     count = 0;
     stop = false;
+
+    std::cout << "[+] Create Threadpool with " << num << " threads\n";
 
     for (size_t i = 0; i < thread; ++i) {
         pthread_create(&thread, NULL, main_work, (void *) this);
