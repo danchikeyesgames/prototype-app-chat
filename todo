@@ -20,7 +20,7 @@ TODO:
   
   * make multiclient connection using list
 
-  * (READY) create threadpool API
+  - (READY) create threadpool API
 
   * create queue messages is based on list
 
