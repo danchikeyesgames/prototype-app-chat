@@ -22,7 +22,7 @@ TODO:
 
   - (READY) create threadpool API
 
-  * create queue messages is based on list
+  - (READY) create queue messages is based on list
 
   * make to transform messages between clients using threadpool,
     server work to process messages from clients in multithread mode with queue messages
