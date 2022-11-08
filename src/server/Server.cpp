@@ -2,6 +2,12 @@
 
 #include "../../include/xchat/Server.hpp"
 
+struct Server::list_node {
+    uint32_t id;
+    char* name[32];
+    int clientfd;
+};
+
 void Server::SaveMessageCommand(uint32_t command, uint32_t second_command) {
     SavePrimaryTwo(command);
     SaveSecondary(second_command);
@@ -27,9 +33,11 @@ void Server::recvMessage() {
 }
 
 void Server::WaitClient() {
-    uint32_t id = 167;
+    uint32_t id = count;
+    int cfd;
+    ++count;
 
-    wait_accept();
+    cfd = wait_accept();
 
     ClearMsg();
     SaveID(server_id);
@@ -37,6 +45,14 @@ void Server::WaitClient() {
     std::cout << "[+] Send id to client: " << id << std::endl;
     SaveMessageData(&id, sizeof(id));
     SendMessage();
+
+    node_t new_node;
+    new_node.id = id;
+    new_node.clientfd = cfd;
+
+    pthread_mutex_lock(threads.GetMutex());
+    clients.push_back(new_node);
+    pthread_mutex_unlock(threads.GetMutex());
 }
 
 void Server::CloseSocket() {
@@ -47,6 +63,8 @@ void Server::SaveNewClient() {
     
 }
 
-Server::Server(int port) : ServerSockets(1, port), Message() {}
+Server::Server(int port) : ServerSockets(1, port), Message() {
+    count = 1;
+}
 
 Server::Server() : ServerSockets(1), Message() {}

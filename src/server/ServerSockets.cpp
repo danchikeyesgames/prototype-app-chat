@@ -30,7 +30,7 @@ int ServerSockets::wait_accept() {
         errors = errors | ERRSERVACCP;
     }
 
-    std::printf("[+] client connected\n");
+    std::printf("[+] client connected successful\n");
     return clientfd;
 }
 
@@ -42,7 +42,7 @@ ssize_t ServerSockets::server_send(const void *msg, int len, int flags) {
         errors = errors | ERRSERVSEND;
     }
 
-    return num; 
+    return num;
 }
 
 ssize_t ServerSockets::server_recv(void *buf, int len, int flags) {

@@ -27,6 +27,7 @@ class Threadpool {
         Threadpool(size_t num = 2);
         bool Add(pthreadpool_work_t func, void* arg);
         void Wait();
+        pthread_mutex_t* GetMutex();
         ~Threadpool();
 
     private:
