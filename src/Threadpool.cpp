@@ -88,10 +88,6 @@ bool Threadpool::Add(pthreadpool_work_t func, void* arg) {
     return true;
 }
 
-pthread_mutex_t* Threadpool::GetMutex() {
-    return &work_mutex;
-}
-
 /**
  * PRIVATE SEGMENT 
  */

@@ -50,9 +50,9 @@ void Server::WaitClient() {
     new_node.id = id;
     new_node.clientfd = cfd;
 
-    pthread_mutex_lock(threads.GetMutex());
+    pthread_mutex_lock(&list_mutex);
     clients.push_back(new_node);
-    pthread_mutex_unlock(threads.GetMutex());
+    pthread_mutex_unlock(&list_mutex);
 }
 
 void Server::CloseSocket() {

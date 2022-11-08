@@ -16,7 +16,8 @@ class Server : public ServerSockets, public Message {
 
         uint32_t server_id = 0;
         Threadpool threads = 20;
-    
+        pthread_mutex_t list_mutex;
+
     public:
         void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
         void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;
