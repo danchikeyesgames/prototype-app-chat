@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fcntl.h>
 
 #include "../../include/xchat/Server.hpp"
 
@@ -49,6 +50,7 @@ void Server::WaitClient() {
     ++count;
 
     cfd = wait_accept();
+    fcntl(cfd, F_SETFL, O_NONBLOCK);
 
     ClearMsg();
     SaveID(server_id);
