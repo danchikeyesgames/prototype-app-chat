@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+
 #include "../../include/xchat/ServerSockets.hpp"
 
 ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
@@ -45,9 +46,9 @@ ssize_t ServerSockets::server_send(const void *msg, int len, int flags) {
     return num;
 }
 
-ssize_t ServerSockets::server_recv(void *buf, int len, int flags) {
+ssize_t ServerSockets::server_recv(int fd_client, void *buf, int len, int flags) {
     std::printf("[+] server wait message...\n");
-    ssize_t num = recv(clientfd, buf, len, flags);
+    ssize_t num = recv(fd_client, buf, len, flags);
     if (num == -1) {
         perror("recv: ");
         errors = errors | ERRSERVRECV;

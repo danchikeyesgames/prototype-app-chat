@@ -2,6 +2,8 @@
 
 #include "../../include/xchat/Server.hpp"
 
+static void ProcessMessage(void* arg);
+
 struct Server::list_node {
     uint32_t id;
     char* name[32];
@@ -28,8 +30,17 @@ void Server::SendMessage() {
 void Server::recvMessage() {
     uint8_t buffer[MSGSIZE];
 
-    server_recv(buffer, MSGSIZE, 0);
-    SaveMessage(buffer);
+    std::list<node_t>::iterator it = clients.begin();
+    std::list<node_t>::iterator itend = clients.end();
+
+    for (; it != itend; ++it) {
+        if (FD_ISSET(it->clientfd, &sock_set)) {
+            server_recv(it->clientfd, buffer, MSGSIZE, 0);
+            SaveMessage(buffer);
+
+            threads.Add(ProcessMessage, buffer);
+        }
+    }
 }
 
 void Server::WaitClient() {
@@ -63,9 +74,11 @@ void Server::DeleteClient(int id) {
     std::list<node_t>::iterator it = clients.begin();
     std::list<node_t>::iterator itend = clients.end();
 
+    pthread_mutex_lock(&list_mutex);
     for (; it != itend; ++it)
         if (it->id == id)
             clients.erase(it);
+    pthread_mutex_unlock(&list_mutex);
 }
 
 Server::Server(int port) : ServerSockets(1, port), Message() {
@@ -73,3 +86,18 @@ Server::Server(int port) : ServerSockets(1, port), Message() {
 }
 
 Server::Server() : ServerSockets(1), Message() {}
+
+void Server::SelectClient() {
+    unsigned long fdmax = 0;
+    FD_ZERO(&sock_set);
+
+    std::list<node_t>::iterator it = clients.begin();
+    std::list<node_t>::iterator itend = clients.end();
+
+    for (; it != itend; ++it) {
+        FD_SET(it->clientfd, &sock_set);
+        if (it->clientfd > fdmax) fdmax = it->clientfd;
+    }
+
+    select(fdmax+1, &sock_set, NULL, NULL, NULL);
+}

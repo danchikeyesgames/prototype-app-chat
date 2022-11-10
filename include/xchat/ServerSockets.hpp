@@ -42,7 +42,7 @@ class ServerSockets {
         
         int     wait_accept();
         ssize_t server_send(const void *msg, int len, int flags);
-        ssize_t server_recv(void *buf, int len, int flags);
+        ssize_t server_recv(int fd_client, void *buf, int len, int flags);
         int     close_socket(int __fd);
 
     private:
