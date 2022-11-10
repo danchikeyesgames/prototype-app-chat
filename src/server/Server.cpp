@@ -59,8 +59,13 @@ void Server::CloseSocket() {
     close_socket(clientfd);
 }
 
-void Server::SaveNewClient() {
-    
+void Server::DeleteClient(int id) {
+    std::list<node_t>::iterator it = clients.begin();
+    std::list<node_t>::iterator itend = clients.end();
+
+    for (; it != itend; ++it)
+        if (it->id == id)
+            clients.erase(it);
 }
 
 Server::Server(int port) : ServerSockets(1, port), Message() {
