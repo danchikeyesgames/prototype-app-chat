@@ -12,11 +12,13 @@ class Server : public ServerSockets, public Message {
         struct list_node;
         typedef list_node node_t;
         std::list<node_t> clients;
-        static uint32_t count;
+        static int count[20];
+        static int capacity;
 
         uint32_t server_id = 0;
         Threadpool threads = 20;
         pthread_mutex_t list_mutex;
+        pthread_mutex_t count_mutex;
 
         fd_set sock_set;
 
@@ -24,7 +26,7 @@ class Server : public ServerSockets, public Message {
         void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
         void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;
 
-        void SendMessage();
+        void SendMessage(uint32_t id);
         void recvMessage();
         void WaitClient();
         void CloseSocket();

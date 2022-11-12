@@ -35,9 +35,9 @@ int ServerSockets::wait_accept() {
     return clientfd;
 }
 
-ssize_t ServerSockets::server_send(const void *msg, int len, int flags) {
+ssize_t ServerSockets::server_send(int fd_client, const void *msg, int len, int flags) {
     std::printf("[+] server send message\n");
-    ssize_t num = send(clientfd, msg, len, flags);
+    ssize_t num = send(fd_client, msg, len, flags);
     if (num == -1) {
         perror("send: ");
         errors = errors | ERRSERVSEND;

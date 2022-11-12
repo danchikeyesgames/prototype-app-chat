@@ -21,11 +21,22 @@ void Server::GetMessageCommand(uint32_t* command, uint32_t* second_command) {
     *second_command = GetSecondary();
 }
 
-void Server::SendMessage() {
+void Server::SendMessage(uint32_t id) {
+    std::list<node_t>::iterator it = clients.begin();
+    std::list<node_t>::iterator itend = clients.end();
+    int fd;
+
+    for (; it != itend; ++it) {
+        if (it->id == id) {
+            fd = it->clientfd;
+            break;
+        }
+    }
+
     SaveID(server_id);
     void* msg = GetMessageSend();
     
-    server_send(msg, MSGSIZE, 0);
+    server_send(fd, msg, MSGSIZE, 0);
 }
 
 void Server::recvMessage() {
@@ -45,9 +56,24 @@ void Server::recvMessage() {
 }
 
 void Server::WaitClient() {
-    uint32_t id = count;
-    int cfd;
-    ++count;
+    int cfd, flag = 0;
+    uint32_t id;
+    
+    pthread_mutex_lock(&count_mutex);
+    if (capacity == 0) {
+        flag = 1;
+    } else {
+        for (int i = 0; i < 20; ++i) {
+            if (count[i] == 0) {
+                count[i] = 1;
+                id = i;
+                --capacity;
+            }
+        }
+    }
+    pthread_mutex_unlock(&count_mutex);
+
+    if (flag == 1) return;
 
     cfd = wait_accept();
     fcntl(cfd, F_SETFL, O_NONBLOCK);
@@ -57,7 +83,7 @@ void Server::WaitClient() {
     SaveMessageCommand(CMDSENDID, 0);
     std::cout << "[+] Send id to client: " << id << std::endl;
     SaveMessageData(&id, sizeof(id));
-    SendMessage();
+    SendMessage(cfd);
 
     node_t new_node;
     new_node.id = id;
@@ -84,7 +110,7 @@ void Server::DeleteClient(int id) {
 }
 
 Server::Server(int port) : ServerSockets(1, port), Message() {
-    count = 1;
+    capacity = 20;
 }
 
 Server::Server() : ServerSockets(1), Message() {}
