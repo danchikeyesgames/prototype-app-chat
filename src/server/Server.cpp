@@ -67,6 +67,7 @@ void Server::WaitClient() {
                 count[i] = 1;
                 id = i;
                 --capacity;
+                break;
             }
         }
     }
@@ -117,6 +118,7 @@ void Server::DeleteClient(uint32_t id) {
 
 Server::Server(int port) : ServerSockets(1, port), Message() {
     capacity = 20;
+    pthread_mutex_init(&count_mutex, NULL);
 }
 
 Server::Server() : ServerSockets(1), Message() {}

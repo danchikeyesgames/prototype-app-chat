@@ -25,12 +25,11 @@ Threadpool::Threadpool(size_t num) {
     stop = false;
 
     std::cout << "[+] Create Threadpool with " << num << " threads\n";
-    std::cout << "[+] Create Threadpool with " << thread << " threads\n";
 
     for (size_t i = 0; i < thread; ++i) {
         pthread_create(&threads, NULL, main_work, (void *) this);
         pthread_detach(threads);
-        // std::cout << "[+] " << i << " thread ready\n";
+        std::cout << "[+] " << i << " thread ready\n";
     }
 
     std::cout << "[+] threadpool create successfuly\n";
