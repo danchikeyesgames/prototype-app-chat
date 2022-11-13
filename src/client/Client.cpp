@@ -54,6 +54,14 @@ void Client::InputName(char* name, uint32_t new_acc) {
     SaveMessageCommand(CMMNDCONNECT, new_acc);
     SaveMessageData(name);
     SendMessage();
+    RecvMessage();
+    uint32_t command, second;
+    GetMessageCommand(&command, &second);
+    if (command == CMDAPPLY) {
+        std::cout << "[+] nickname apply\n";
+    } else {
+        std::cout << "[+] Message ignored\n";
+    }
 }
 
 Client::Client(int port) : ClientSockets(port), Message() {}

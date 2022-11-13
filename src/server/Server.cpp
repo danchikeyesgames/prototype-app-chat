@@ -167,6 +167,8 @@ void ProcessMessage(void* arg) {
             }
         }
 
+        std::cout << "[+] new user: " << chrt << "\n";
+
         pthread_mutex_lock(&list_mutex);
         std::list<node_t>::iterator it = clients.begin();
         std::list<node_t>::iterator itend = clients.end();
@@ -182,6 +184,8 @@ void ProcessMessage(void* arg) {
 
         MSGTOUI32(bufto, INDEXID, 0);
         MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDAPPLY);
+        
+        std::cout << "[+] send apply\n";
         send(sentfd, bufto, 1024, 0);
 
     } else if (command == CMMNDSEND) {

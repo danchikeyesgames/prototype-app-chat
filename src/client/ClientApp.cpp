@@ -13,6 +13,7 @@ int main() {
 
     c.Connect();
 
+    std::cout << "Enter nickname: ";
     std::cin >> buf;
     c.InputName(buf, CMMNDCNNCTNW);
     std::cout << "My name: " << buf << "\n";
