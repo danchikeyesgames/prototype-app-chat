@@ -33,6 +33,7 @@ class Threadpool {
         pth_work_t* create_work(pthreadpool_work_t func, void* arg);
         pth_work_t* get_worker();
         void        destroy_work(pth_work_t* worker);
+        void        exec_func(pthreadpool_work_t foo, void* arg);
 };
 
 #endif          // __THREADPOOL_HPP__

@@ -16,6 +16,7 @@
 
 #define CMDSENDID   0x01
 #define CMDMSG      0x02
+#define CMDAPPLY    0x03
 
 #define FORMATCHR 0x01
 #define FORMATSTR 0x02

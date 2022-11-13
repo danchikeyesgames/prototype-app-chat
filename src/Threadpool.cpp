@@ -1,6 +1,8 @@
 #include <iostream>
+#include <cstring>
 
 #include "../include/Threadpool.hpp"
+#include "../include/xchat/Server.hpp"
 
 struct Threadpool::pth_work {
     pthreadpool_work_t  func;
@@ -97,7 +99,8 @@ Threadpool::pth_work_t* Threadpool::create_work(pthreadpool_work_t func, void* a
 
     worker = new pth_work_t;
     worker->func = func;
-    worker->arg  = arg;
+    worker->arg  = malloc(sizeof(char) * 1024);
+    std::memcpy(worker->arg, arg, 1024);
     worker->next = NULL;
 
     return worker;
@@ -165,5 +168,10 @@ void Threadpool::destroy_work(pth_work_t* worker) {
     if (worker == NULL)
         return;
 
+    free(worker->arg);
     delete worker;
+}
+
+void Threadpool::exec_func(pthreadpool_work_t foo, void* arg) {
+    foo(arg);
 }
