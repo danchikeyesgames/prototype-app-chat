@@ -1,17 +1,10 @@
 #ifndef __SERVER_HPP__
 #define __SERVER_HPP__
 
-#include <list>
-
 #include "ServerSockets.hpp"
 #include "../Message.hpp"
 #include "../Threadpool.hpp"
 
-struct list_node;
-typedef list_node node_t;
-
-std::list<node_t> clients;
-pthread_mutex_t list_mutex;
 
 class Server : public ServerSockets, public Message {
     private:

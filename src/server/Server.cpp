@@ -2,13 +2,8 @@
 #include <fcntl.h>
 #include <cstring>
 
+#include "../../include/xchat/ServerVar.hpp"
 #include "../../include/xchat/Server.hpp"
-
-struct list_node {
-    uint32_t id;
-    char name[32];
-    int clientfd;
-};
 
 void Server::SaveMessageCommand(uint32_t command, uint32_t second_command) {
     SavePrimaryTwo(command);
@@ -183,7 +178,7 @@ void ProcessMessage(void* arg) {
 
         MSGTOUI32(bufto, INDEXID, 0);
         MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDAPPLY);
-        send(sentfd, bufto, 1024, NULL);
+        send(sentfd, bufto, 1024, 0);
 
     } else if (command == CMMNDSEND) {
         id = GETMSGIND(buffer, INDEXID);
@@ -248,7 +243,7 @@ void ProcessMessage(void* arg) {
             }
             pthread_mutex_unlock(&list_mutex);
             
-            send(sentfd, bufto, 1024, NULL);
+            send(sentfd, bufto, 1024, 0);
         }
     }
 }

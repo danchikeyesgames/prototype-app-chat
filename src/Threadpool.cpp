@@ -2,7 +2,6 @@
 #include <cstring>
 
 #include "../include/Threadpool.hpp"
-#include "../include/xchat/Server.hpp"
 
 struct Threadpool::pth_work {
     pthreadpool_work_t  func;
