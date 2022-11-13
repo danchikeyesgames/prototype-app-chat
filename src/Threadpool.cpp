@@ -30,6 +30,8 @@ Threadpool::Threadpool(size_t num) {
         pthread_create(&thread, NULL, main_work, (void *) this);
         pthread_detach(thread);
     }
+
+    std::cout << "[+] threadpool create successfuly\n";
 }
 
 Threadpool::~Threadpool() {

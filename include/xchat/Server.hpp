@@ -9,8 +9,8 @@
 class Server : public ServerSockets, public Message {
     private:
 
-        static int count[20];
-        static int capacity;
+        int count[20];
+        int capacity;
 
         uint32_t server_id = 0;
         Threadpool threads = 20;

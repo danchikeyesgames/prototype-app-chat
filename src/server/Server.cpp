@@ -75,6 +75,7 @@ void Server::WaitClient() {
     if (flag == 1) return;
 
     cfd = wait_accept();
+    std::cout << "[+] client connecting\n";
     fcntl(cfd, F_SETFL, O_NONBLOCK);
 
     ClearMsg();
