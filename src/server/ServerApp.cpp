@@ -11,21 +11,13 @@ int main() {
 
 
     myserver.WaitClient();
-    myserver.recvMessage();
+    myserver.WaitClient();
     
-    myserver.GetMessageCommand(&one, &two);
-
-    if (one == CMMNDCONNECT && two == CMMNDCNNCTNW) {
-        ptr = myserver.LoadMessageData();
-
-        std::cout << "Message: " << (char *) ptr << "\n";
-        myserver.SaveMessageData((char *) ptr);
-        myserver.SaveMessageCommand(0, 0);
-        myserver.SendMessage();
+    while (1) {
+        myserver.SelectClient();
+        myserver.recvMessage();
     }
-
     
-
     myserver.CloseSocket();
     return 0;
 }

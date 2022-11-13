@@ -111,6 +111,12 @@ void Server::DeleteClient(uint32_t id) {
         if (it->id == id)
             clients.erase(it);
     pthread_mutex_unlock(&list_mutex);
+
+    pthread_mutex_lock(&count_mutex);
+    
+    count[id] = 0;
+    
+    pthread_mutex_unlock(&count_mutex);
 }
 
 Server::Server(int port) : ServerSockets(1, port), Message() {
@@ -178,7 +184,7 @@ void ProcessMessage(void* arg) {
         MSGTOUI32(bufto, INDEXID, 0);
         MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDAPPLY);
         send(sentfd, bufto, 1024, NULL);
-        
+
     } else if (command == CMMNDSEND) {
         id = GETMSGIND(buffer, INDEXID);
         chrt = (char *) &buffer[INDEXNAME];
