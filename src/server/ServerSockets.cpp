@@ -24,7 +24,7 @@ ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
 }
 
 int ServerSockets::wait_accept() {
-    std::printf("[+] server wait connected client\n");
+    std::printf("[+] server wait client\n");
     clientfd = accept(sockfd, NULL, NULL);
     if (clientfd < 0) {
         perror("accept: ");

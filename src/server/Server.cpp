@@ -76,16 +76,9 @@ void Server::WaitClient() {
     if (flag == 1) return;
 
     cfd = wait_accept();
-    std::cout << "[+] client connecting\n";
-    fcntl(cfd, F_SETFL, O_NONBLOCK);
+    fcntl(cfd, F_SETFD, O_NONBLOCK);
 
-    ClearMsg();
-    SaveID(server_id);
-    SaveMessageCommand(CMDSENDID, 0);
-    std::cout << "[+] Send id to client: " << id << std::endl;
-    SaveMessageData(&id, sizeof(id));
-    SendMessage(cfd);
-
+    std::cout << "[+] write id & fd to lsit\n";
     node_t new_node;
     new_node.id = id;
     new_node.clientfd = cfd;
@@ -93,6 +86,13 @@ void Server::WaitClient() {
     pthread_mutex_lock(&list_mutex);
     clients.push_back(new_node);
     pthread_mutex_unlock(&list_mutex);
+
+    ClearMsg();
+    SaveID(server_id);
+    SaveMessageCommand(CMDSENDID, 0);
+    std::cout << "[+] Send id to client: " << id << std::endl;
+    SaveMessageData(&id, sizeof(id));
+    SendMessage(id);
 }
 
 void Server::CloseSocket() {
@@ -119,6 +119,7 @@ void Server::DeleteClient(uint32_t id) {
 Server::Server(int port) : ServerSockets(1, port), Message() {
     capacity = 20;
     pthread_mutex_init(&count_mutex, NULL);
+    memset(count, 0, capacity);
 }
 
 Server::Server() : ServerSockets(1), Message() {}
