@@ -10,6 +10,7 @@
 #define CMMNDEXIT       0x1
 #define CMMNDSEND       0x2
 #define CMMNDLOADMSG    0x3
+#define CMMNDNICKNAME   0x4
 
 #define CMMNDCNNCTNW 0x0
 #define CMMNDCNNCTCH 0x1
