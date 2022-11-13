@@ -1,10 +1,10 @@
 CC=g++
 FLAGS=-std=c++11 -c
 
-SERVERFILES=src/server/ServerSockets.cpp src/server/ServerApp.cpp src/SocketIp.cpp src/Message.cpp src/server/Server.cpp
+SERVERFILES=src/server/ServerSockets.cpp src/server/ServerApp.cpp src/SocketIp.cpp src/Message.cpp src/server/Server.cpp src/Threadpool.cpp
 CLIENTFILES=src/client/ClientSockets.cpp src/client/ClientApp.cpp src/SocketIp.cpp src/Message.cpp src/client/Client.cpp
 
-SERVEROBJECTS=obj/ServerSockets.o obj/ServerApp.o obj/SocketIp.o obj/Message.o obj/Server.o
+SERVEROBJECTS=obj/ServerSockets.o obj/ServerApp.o obj/SocketIp.o obj/Message.o obj/Server.o obj/Threadpool.o
 CLIENTOBJECTS=obj/ClientSockets.o obj/ClientApp.o obj/SocketIp.o obj/Message.o obj/Client.o
 
 build_client.elf: $(CLIENTOBJECTS) obj
@@ -33,6 +33,8 @@ obj/ClientApp.o: obj src/client/ClientApp.cpp
 obj/Client.o: src/client/Client.cpp
 	$(CC) $(FLAGS) src/client/Client.cpp -o obj/Client.o
 
+obj/Threadpool.o: src/Threadpool.cpp
+	$(CC) $(FLAGS) src/Threadpool.cpp -o obj/Threadpool.o
 
 # COMMON
 obj:
