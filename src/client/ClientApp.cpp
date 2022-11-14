@@ -3,6 +3,8 @@
 
 #include "../../include/xchat/Client.hpp"
 
+static char* next_word(char* msg);
+
 int main() {
     Client c;
     char buf[1024] = {0};
@@ -10,6 +12,9 @@ int main() {
     char nameto[32] = {0};
     uint32_t command = 0, second = 0;
     char* pointer = NULL;
+    char* one;
+    char* two;
+    char* three;
 
     c.Connect();
 
@@ -22,10 +27,14 @@ int main() {
         std::cin.getline(message, 512, '\n');
 
         if (std::strncmp(message, "/msg ", 5) == 0) {
-            memcpy(nameto, message + 5, 32);
+            one = next_word(message);
+            two = next_word(one);
+            int three = two - one - 1;
+            memcpy(nameto, message + 5, three);
+            std::cout << nameto << ": " << three << " bytes\n";
             c.SaveMessageName(nameto);
             c.SaveMessageCommand(CMMNDSEND, 0);
-            c.SaveMessageData(message + 37);
+            c.SaveMessageData(message + 5 + three + 1);
             c.SendMessage();
 
             c.RecvMessage();
@@ -47,4 +56,9 @@ int main() {
 
     c.CloseSocket();
     return 0;
+}
+
+static char* next_word(char* msg) {
+    char* newword = strchr(msg, ' ');
+    return newword + 1;
 }

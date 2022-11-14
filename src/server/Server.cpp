@@ -153,19 +153,24 @@ void ProcessMessage(void* arg) {
     char* data;
     uint8_t bufto[1024] = {0};
     int sentfd;
-    
+
     std::cout << "[+] start treature message\n";
     command = GETMSGIND(buffer, INDEXCONTROLPRIMAR);
+    secondcommand = GETMSGIND(buffer, INDEXCONTROLSECOND);
 
     if (command == CMMNDCONNECT) {
         id = GETMSGIND(buffer, INDEXID);
 
-        if (secondcommand == CMMNDCNNCTCH) {
+        if (secondcommand == CMMNDCNNCTNW) {
             if (GETMSGIND16(buffer, INDEXFORMATDATA256) > 0) {
+                std::cout << "256\n";
                 chrt = (char *) &buffer[INDEXDATA256];
             } else if (GETMSGIND16(buffer, INDEXFORMATDATA512) > 0) {
                 chrt = (char *) &buffer[INDEXDATA512];
+                std::cout << "512\n";
             }
+
+            std::cout << GETMSGIND(buffer, INDEXFORMATDATA256) << ":::\n";
         }
 
         std::cout << "[+] new user: " << chrt << "\n";
@@ -194,6 +199,9 @@ void ProcessMessage(void* arg) {
         chrt = (char *) &buffer[INDEXNAME];
         sizedata = GETMSGIND(buffer, INDEXDATASIZE);
         sizename = GETMSGIND(buffer, INDEXNAMESIZE);
+        
+        std::cout << "sizedata: " << sizedata << "\n";
+
         if (sizedata > 512 || sizedata <= 256)
             data = (char *) &buffer[256];
         else
@@ -212,6 +220,8 @@ void ProcessMessage(void* arg) {
             }
         }
         pthread_mutex_unlock(&list_mutex);
+
+        std::cout << "[+] message from " << name << ": " << data << "\n";
 
         if (name[0] == '\0') {
             //

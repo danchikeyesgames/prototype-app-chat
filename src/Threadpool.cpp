@@ -121,7 +121,6 @@ void* main_work(void* arg) {
         stop = pool->stop;
         while (pool->first_message == NULL && !stop) {
             pthread_cond_wait(&pool->work_cond, &pool->work_mutex);
-            std::cout << "I'm here\n";
         }
 
         std::cout << "[+] thread ready to work\n";
