@@ -153,7 +153,8 @@ void ProcessMessage(void* arg) {
     char* data;
     uint8_t bufto[1024] = {0};
     int sentfd;
-
+    
+    std::cout << "[+] start treature message\n";
     command = GETMSGIND(buffer, INDEXCONTROLPRIMAR);
 
     if (command == CMMNDCONNECT) {

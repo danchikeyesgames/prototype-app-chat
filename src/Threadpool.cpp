@@ -86,6 +86,8 @@ bool Threadpool::Add(pthreadpool_work_t func, void* arg) {
         last_message = worker;
     }
 
+    std::cout << "[+] Add work\n";
+
     pthread_cond_broadcast(&work_cond);
     pthread_mutex_unlock(&work_mutex);
 
@@ -116,11 +118,13 @@ void* main_work(void* arg) {
     while (1) {
         pthread_mutex_lock(&pool->work_mutex);
 
-        work_node = pool->first_message;
         stop = pool->stop;
-        while (work_node == NULL && !stop) {
+        while (pool->first_message == NULL && !stop) {
             pthread_cond_wait(&pool->work_cond, &pool->work_mutex);
+            std::cout << "I'm here\n";
         }
+
+        std::cout << "[+] thread ready to work\n";
 
         if (stop)
             break;
