@@ -230,19 +230,19 @@ void ProcessMessage(void* arg) {
             MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDMSG);
             
             if (sizedata + 32 <= 256) {
-                MSGTOUI16(buffer, INDEXFORMATDATA256, FORMATCHR);
-                MSGTOUI32(buffer, INDEXDATASIZE, sizedata + 32);
+                MSGTOUI16(bufto, INDEXFORMATDATA256, FORMATCHR);
+                MSGTOUI32(bufto, INDEXDATASIZE, sizedata + 32);
                 std::memcpy(bufto + INDEXDATA256, name, 32);
                 std::memcpy(bufto + INDEXDATA256 + 32, data, sizedata);
             } else if (sizedata + 32 > 256 && sizedata + 32 <= 512) {
-                MSGTOUI16(buffer, INDEXFORMATDATA512, FORMATCHR);
-                MSGTOUI32(buffer, INDEXDATASIZE, sizedata + 32);
+                MSGTOUI16(bufto, INDEXFORMATDATA512, FORMATCHR);
+                MSGTOUI32(bufto, INDEXDATASIZE, sizedata + 32);
                 std::memcpy(bufto + INDEXDATA512, name, 32);
                 std::memcpy(bufto + INDEXDATA512 + 32, data, sizedata);
             } else if (sizedata + 32 > 512) {
-                MSGTOUI16(buffer, INDEXFORMATDATA256, FORMATCHR);
-                MSGTOUI16(buffer, INDEXFORMATDATA512, FORMATCHR);
-                MSGTOUI32(buffer, INDEXDATASIZE, sizedata + 32);
+                MSGTOUI16(bufto, INDEXFORMATDATA256, FORMATCHR);
+                MSGTOUI16(bufto, INDEXFORMATDATA512, FORMATCHR);
+                MSGTOUI32(bufto, INDEXDATASIZE, sizedata + 32);
                 std::memcpy(bufto + INDEXDATA256, name, 32);
                 std::memcpy(bufto + INDEXDATA256 + 32, data, sizedata);
             }

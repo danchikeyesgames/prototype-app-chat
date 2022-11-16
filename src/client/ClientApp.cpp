@@ -41,7 +41,6 @@ int main() {
             pointer = (char *) c.LoadMessageData();
             c.GetMessageCommand(&command, &second);
 
-            std::cout << "echo: " << pointer << "\n";
             if (command == CMDMSG) {
                 memset(nameto, 0, 32);
                 memcpy(nameto, pointer, 32);
