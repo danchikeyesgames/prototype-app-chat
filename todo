@@ -16,15 +16,15 @@ TODO:
 
   - (READY) create input name for client
 
-  * design structure to save information of clients
+  - (READY) design structure to save information of clients
   
-  * make multiclient connection using list
+  - (READY) make multiclient connection using list
 
   - (READY) create threadpool API
 
   - (READY) create queue messages is based on list
 
-  * make to transform messages between clients using threadpool,
+  - (READY) make to transform messages between clients using threadpool,
     server work to process messages from clients in multithread mode with queue messages
 
   * rewrite make to Cmake
