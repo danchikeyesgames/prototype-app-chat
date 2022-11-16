@@ -38,6 +38,9 @@ void Server::SendMessage(uint32_t id) {
 
 void Server::recvMessage() {
     uint8_t buffer[MSGSIZE];
+    int num = 0;
+    int closefd = 0;
+    uint32_t id;
 
     pthread_mutex_lock(&list_mutex);
     std::list<node_t>::iterator it = clients.begin();
@@ -45,11 +48,21 @@ void Server::recvMessage() {
 
     for (; it != itend; ++it) {
         if (FD_ISSET(it->clientfd, &sock_set)) {
-            server_recv(it->clientfd, buffer, MSGSIZE, 0);
+            num = server_recv(it->clientfd, buffer, MSGSIZE, 0);
+            
+            if (num == 0) {
+                closefd = it->clientfd;
+                id      = it->id;
+            } else {
             SaveMessage(buffer);
-
             threads.Add(ProcessMessage, buffer);
+            }
         }
+    }
+
+    if (closefd != 0) {
+        close_socket(closefd);
+        DeleteClient(id);
     }
     pthread_mutex_unlock(&list_mutex);
 }
@@ -78,7 +91,7 @@ void Server::WaitClient() {
     cfd = wait_accept();
     fcntl(cfd, F_SETFD, O_NONBLOCK);
 
-    std::cout << "[+] write id & fd to lsit\n";
+    std::cout << "[+] write id & fd to list\n";
     node_t new_node;
     new_node.id = id;
     new_node.clientfd = cfd;
@@ -103,16 +116,15 @@ void Server::DeleteClient(uint32_t id) {
     std::list<node_t>::iterator it = clients.begin();
     std::list<node_t>::iterator itend = clients.end();
 
-    pthread_mutex_lock(&list_mutex);
-    for (; it != itend; ++it)
-        if (it->id == id)
+    for (; it != itend; ++it) {
+        if (it->id == id) {
             clients.erase(it);
-    pthread_mutex_unlock(&list_mutex);
-
+            break;
+        }
+    }
+    
     pthread_mutex_lock(&count_mutex);
-    
     count[id] = 0;
-    
     pthread_mutex_unlock(&count_mutex);
 }
 
