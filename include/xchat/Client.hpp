@@ -17,7 +17,7 @@ class Client : public ClientSockets, public Message {
         void InputName(char* name, uint32_t new_acc);
         void Connect();
         void SendMessage();
-        void RecvMessage();
+        int RecvMessage();
         void WaitClient();
         void CloseSocket();
 

@@ -19,11 +19,13 @@ void Client::SendMessage() {
     client_send(msg, MSGSIZE, 0);
 }
 
-void Client::RecvMessage() {
+int Client::RecvMessage() {
     uint8_t buffer[MSGSIZE];
 
-    client_recv(buffer, MSGSIZE, 0);
+    int i = client_recv(buffer, MSGSIZE, 0);
     SaveMessage(buffer);
+
+    return i;
 }
 
 void Client::CloseSocket() {
