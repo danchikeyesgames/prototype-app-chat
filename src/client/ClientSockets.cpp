@@ -5,11 +5,19 @@
 
 ClientSockets::ClientSockets(unsigned short port) : port(port) {
     errors = 0;
+    uint32_t ip = 0;
 
     std::printf("[+] create address to connection\n");
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
-    address.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    ip |= 0xC0;
+    ip = ip << 8;
+    ip |= 0xA8;
+    ip = ip << 8;
+    ip |= 0x00;
+    ip = ip << 8;
+    ip |= 0xF4;
+    address.sin_addr.s_addr = htonl(ip);
     std::printf("[+] ip: ");
     PrintSocket(address);
 
