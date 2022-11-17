@@ -18,6 +18,7 @@ ClientSockets::ClientSockets(unsigned short port) : port(port) {
     ip = ip << 8;
     ip |= 0xF4;
     address.sin_addr.s_addr = htonl(ip);
+
     std::printf("[+] ip: ");
     PrintSocket(address);
 
@@ -26,7 +27,9 @@ ClientSockets::ClientSockets(unsigned short port) : port(port) {
 }
 
 int ClientSockets::client_send(const void *msg, int len, int flags) {
+#ifdef DEBUG_SERVER
     std::printf("[+] send message\n");
+#endif
     ssize_t num = send(sockfd, msg, len, flags);
     if (num == -1) {
         perror("send: ");
@@ -36,13 +39,16 @@ int ClientSockets::client_send(const void *msg, int len, int flags) {
 }
 
 int ClientSockets::client_recv(void *buf, int len, int flags) {
+#ifdef DEBUG_SERVER
     std::printf("[+] wait message...\n");
+#endif
     ssize_t num = recv(sockfd, buf, len, flags);
     if (num == -1) {
         perror("recv: ");
     }
-
+#ifdef DEBUG_SERVER
     std::printf("[+] get message\n");
+#endif
     return num;
 }
 

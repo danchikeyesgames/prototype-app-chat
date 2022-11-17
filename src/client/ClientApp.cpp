@@ -35,7 +35,7 @@ int main() {
             two = next_word(one);
             int three = two - one - 1;
             memcpy(nameto, message + 5, three);
-            std::cout << nameto << ": " << three << " bytes\n";
+            // std::cout << nameto << ": " << three << " bytes\n";
             c.SaveMessageName(nameto);
             c.SaveMessageCommand(CMMNDSEND, 0);
             c.SaveMessageData(message + 5 + three + 1);
