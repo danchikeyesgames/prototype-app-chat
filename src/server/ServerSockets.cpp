@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include <fcntl.h>
 
 #include "../../include/xchat/ServerSockets.hpp"
 
@@ -17,6 +18,7 @@ ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
 
     std::printf("[+] create socket\n");
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);
+    fcntl(sockfd, F_SETFD, O_NONBLOCK);
     std::printf("[+] bind socket\n");
     create_bind(sockfd, (sockaddr *) &address, sizeof(address));
     std::printf("[+] server listen port\n");

@@ -42,6 +42,11 @@ void Server::recvMessage() {
     int closefd = 0;
     uint32_t id;
 
+    if (FD_ISSET(sockfd, &sock_set)) {
+        std::cout << "[+] start WaitClient()\n";
+        WaitClient();
+    }
+
     pthread_mutex_lock(&list_mutex);
     std::list<node_t>::iterator it = clients.begin();
     std::list<node_t>::iterator itend = clients.end();
@@ -54,8 +59,8 @@ void Server::recvMessage() {
                 closefd = it->clientfd;
                 id      = it->id;
             } else {
-            SaveMessage(buffer);
-            threads.Add(ProcessMessage, buffer);
+                SaveMessage(buffer);
+                threads.Add(ProcessMessage, buffer);
             }
         }
     }
@@ -99,7 +104,7 @@ void Server::WaitClient() {
     pthread_mutex_lock(&list_mutex);
     clients.push_back(new_node);
     pthread_mutex_unlock(&list_mutex);
-
+    
     ClearMsg();
     SaveID(server_id);
     SaveMessageCommand(CMDSENDID, 0);
@@ -140,9 +145,13 @@ void Server::SelectClient() {
     unsigned long fdmax = 0;
     FD_ZERO(&sock_set);
 
+    std::cout << "[+] start select()\n";
     pthread_mutex_lock(&list_mutex);
     std::list<node_t>::iterator it = clients.begin();
     std::list<node_t>::iterator itend = clients.end();
+
+    FD_SET(sockfd, &sock_set);
+    if (sockfd > fdmax) fdmax = sockfd;
 
     for (; it != itend; ++it) {
         FD_SET(it->clientfd, &sock_set);
