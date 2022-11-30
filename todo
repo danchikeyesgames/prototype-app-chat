@@ -33,6 +33,8 @@ TODO:
 
   * relize command '/online' to see all users online
 
+  * make bash script to improve autobuild 
+
   * make commandline to server for configuration
 
   * add capable to create group chat with command '/create [names]...'
