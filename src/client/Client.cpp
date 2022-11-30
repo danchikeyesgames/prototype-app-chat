@@ -50,14 +50,14 @@ void Client::Connect() {
     if (command == CMDSENDID && id == 0) {
         ptr = LoadMessageData();
         myid = ((uint32_t *) ptr)[0];
-        std::cout << "[+] Get new id for client: " << myid << "\n";
+        std::cout << "\033[39m[+] Get new id for client: " << myid << "\033[33m\n";
     }
 
     client_id = myid;
 }
 
 void Client::InputName(char* name, uint32_t new_acc) {
-    std::cout << "[+] Send nickname to server: " << name << "\n";
+    std::cout << "\033[39m[+] Send nickname to server: " << name << "\n";
     SaveMessageCommand(CMMNDCONNECT, new_acc);
     SaveMessageData(name);
     SendMessage();
@@ -65,7 +65,7 @@ void Client::InputName(char* name, uint32_t new_acc) {
     uint32_t command, second;
     GetMessageCommand(&command, &second);
     if (command == CMDAPPLY) {
-        std::cout << "[+] nickname apply\n";
+        std::cout << "\033[39m[+] nickname apply\033[33m\n";
     } else {
         std::cout << "[+] Message ignored\n";
     }

@@ -26,15 +26,17 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Enter nickname: ";
+    std::cout << "\033[35mEnter nickname: ";
     std::cin >> buf;
     c.InputName(buf, CMMNDCNNCTNW);
-    std::cout << "My name: " << buf << "\n";
+    std::cout << "\033[35mMy name: " << buf << "\033[39m\n";
     pthread_create(&thread, NULL, recv_thread, &c);
     pthread_detach(thread);
 
     while (1) {
+        std::cout << "\033[33m";
         std::cin.getline(message, 512, '\n');
+        std::cout << "\033[39m";
 
         if (std::strncmp(message, "/msg ", 5) == 0) {
             one = next_word(message);
@@ -46,7 +48,7 @@ int main() {
             c.SaveMessageCommand(CMMNDSEND, 0);
             c.SaveMessageData(message + 5 + three + 1);
             c.SendMessage();    
-        } 
+        }
     }
 
     c.CloseSocket();
@@ -69,7 +71,7 @@ static void* recv_thread(void* arg) {
         i = client_class->RecvMessage();
 
         if (i == 0) {
-            std::cout << "[+] conneccted lost\n";
+            std::cout << "[+] connection lost\n";
             break;
         }
 
@@ -79,7 +81,7 @@ static void* recv_thread(void* arg) {
         if (command == CMDMSG) {
             memset(nameto, 0, 32);
             memcpy(nameto, pointer, 32);
-            std::cout << nameto << ": " << (char *) (pointer + 32) << "\n";
+            std::cout << "\033[35m" << nameto << ": " << (char *) (pointer + 32) << "\033[33m\n";
         }
 
         memset(nameto, 0, 32);

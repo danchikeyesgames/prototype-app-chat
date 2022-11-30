@@ -28,14 +28,14 @@ int ClientSockets::client_send(const void *msg, int len, int flags) {
 
 int ClientSockets::client_recv(void *buf, int len, int flags) {
 #ifdef DEBUG_SERVER
-    std::printf("[+] wait message...\n");
+    std::printf("\033[39m[+] wait message...\033[33m\n");
 #endif
     ssize_t num = recv(sockfd, buf, len, flags);
     if (num == -1) {
         perror("recv: ");
     }
 #ifdef DEBUG_SERVER
-    std::printf("[+] get message\n");
+    std::printf("\033[39m[+] get message\033[33m\n");
 #endif
     return num;
 }

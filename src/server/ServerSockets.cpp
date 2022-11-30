@@ -101,8 +101,9 @@ int ServerSockets::create_socket(int domain, int type, int protocol) {
 int ServerSockets::create_bind(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len) {
     int bnd = bind(fd, addr, len);
     if (bnd < 0) {
-        perror("bind: ");
+        perror("\033[91m[+] bind");
         errors = errors | ERRSERVBIND;
+        std::printf("\033[39m");
     }
 
     return bnd;
