@@ -35,7 +35,7 @@ void Client::CloseSocket() {
 void Client::Connect() {
     uint32_t id, command, sec_command, myid;
     socket_connect();
-    std::cout << "[+] set connection successful\n";
+    std::cout << "\033[92m[+] set connection successful\033[39m\n";
     void* ptr = NULL;
 
     RecvMessage();

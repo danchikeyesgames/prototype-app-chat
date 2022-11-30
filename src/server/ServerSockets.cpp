@@ -13,7 +13,7 @@ ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     address.sin_addr.s_addr = htonl(INADDR_ANY);
-    std::printf("[+] start server on address 192.168.0.244:%d\n", port);
+    std::printf("\033[92m[+] start server on address 192.168.0.244:%d\033[39m\n", port);
 
     std::printf("[+] create socket\n");
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);
@@ -25,7 +25,7 @@ ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
 }
 
 int ServerSockets::wait_accept() {
-    std::printf("[+] server accept client\n");
+    std::printf("\033[92m[+] server accept client\033[39m\n");
     clientfd = accept(sockfd, NULL, NULL);
     if (clientfd < 0) {
         perror("accept: ");

@@ -4,7 +4,7 @@
 #include "../include/SocketIp.hpp"
 
 void PrintSocket(const sockaddress* addr) {
-    std::printf("%d.%d.%d.%d:%u\n", 
+    std::printf("%d.%d.%d.%d:%u\033[39m\n", 
             (ntohl(addr->sin_addr.s_addr) & 0xFF000000) >> 24, (ntohl(addr->sin_addr.s_addr) & 0x00FF0000) >> 16, 
             (ntohl(addr->sin_addr.s_addr) & 0x0000FF00) >> 8, ntohl(addr->sin_addr.s_addr) & 0x000000FF, ntohs(addr->sin_port));
 }
@@ -12,7 +12,7 @@ void PrintSocket(const sockaddress* addr) {
 void InitAddress(sockaddr_in* adr, uint16_t port) {
     uint32_t ip = 0;
 
-    std::printf("[+] create address to connection\n");
+    std::printf("\033[92m[+] create address to connection\n");
     adr->sin_family = AF_INET;
     adr->sin_port = htons(port);
     ip |= 0xC0;

@@ -191,7 +191,7 @@ void ProcessMessage(void* arg) {
             }
         }
 
-        std::cout << "[+] new user: " << chrt << "\n";
+        std::cout << "\033[92m[+] new user: " << chrt << "\033[39m\n";
 
         pthread_mutex_lock(&list_mutex);
         std::list<node_t>::iterator it = clients.begin();
