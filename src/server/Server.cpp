@@ -43,7 +43,6 @@ void Server::recvMessage() {
     uint32_t id;
 
     if (FD_ISSET(sockfd, &sock_set)) {
-        std::cout << "[+] start WaitClient()\n";
         WaitClient();
     }
 
@@ -145,7 +144,7 @@ void Server::SelectClient() {
     unsigned long fdmax = 0;
     FD_ZERO(&sock_set);
 
-    std::cout << "[+] start select()\n";
+    std::cout << "[+] wait message from sockets..........\n";
     pthread_mutex_lock(&list_mutex);
     std::list<node_t>::iterator it = clients.begin();
     std::list<node_t>::iterator itend = clients.end();
@@ -190,8 +189,6 @@ void ProcessMessage(void* arg) {
                 chrt = (char *) &buffer[INDEXDATA512];
                 std::cout << "512\n";
             }
-
-            std::cout << GETMSGIND(buffer, INDEXFORMATDATA256) << ":::\n";
         }
 
         std::cout << "[+] new user: " << chrt << "\n";
@@ -212,7 +209,7 @@ void ProcessMessage(void* arg) {
         MSGTOUI32(bufto, INDEXID, 0);
         MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDAPPLY);
         
-        std::cout << "[+] send apply\n";
+        std::cout << "[+] message ready\n";
         send(sentfd, bufto, 1024, 0);
 
     } else if (command == CMMNDSEND) {

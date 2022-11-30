@@ -29,10 +29,9 @@ Threadpool::Threadpool(size_t num) {
     for (size_t i = 0; i < thread; ++i) {
         pthread_create(&threads, NULL, main_work, (void *) this);
         pthread_detach(threads);
-        std::cout << "[+] " << i << " thread ready\n";
     }
 
-    std::cout << "[+] threadpool create successfuly\n";
+    std::cout << "[+] threadpool create successful\n";
 }
 
 Threadpool::~Threadpool() {
