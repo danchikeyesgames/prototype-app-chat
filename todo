@@ -27,20 +27,30 @@ TODO:
   - (READY) make to transform messages between clients using threadpool,
     server work to process messages from clients in multithread mode with queue messages
 
+  - (READY) relize log in and command '/msg [nameto] [message]'
+
+  * add different colors to logs in server
+
+  * relize command '/online' to see all users online
+
+  * make commandline to server for configuration
+
+  * add capable to create group chat with command '/create [names]...'
+
+  * add support PostgreSQL data base to keep messages
+
+  * relize command '/lmsg [name]' to watch tail 10 message with user with nickname [name]
+
+  * relize sing in/sing up to server and save accaunt and settings in data base
+
   * rewrite make to Cmake
 
   (c) Linux version
- -----------------------------------------------------------
+
+-----------------------------------------------------------
 
 @ Realization window application:
   *
-
-(c) Linux version
-
-------------------------------------------------------------
-
-@ Add graphics to window application
-  * 
 
 (c) Linux version
 
