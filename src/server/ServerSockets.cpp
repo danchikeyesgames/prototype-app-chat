@@ -6,14 +6,14 @@
 ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
     errors = 0;
 
-    std::printf("---------------------------------- log -----------------------------\n");
+    std::printf("---------------------------------- logs -----------------------------\n");
     std::printf("[+] init server\n");
     std::printf("[+] init address for socket connection\n");
     address.sin_family = AF_INET;
     address.sin_port = htons(port);
     address.sin_addr.s_addr = htonl(INADDR_ANY);
     std::printf("[+] creating server on address ");
-    PrintSocket(address);
+    PrintSocket(&address);
 
     std::printf("[+] create socket\n");
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);

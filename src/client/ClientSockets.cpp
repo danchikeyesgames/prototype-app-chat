@@ -3,24 +3,12 @@
 
 #include "../../include/xchat/ClientSockets.hpp"
 
+#define DEBUG_SERVER
+
 ClientSockets::ClientSockets(unsigned short port) : port(port) {
     errors = 0;
-    uint32_t ip = 0;
-
-    std::printf("[+] create address to connection\n");
-    address.sin_family = AF_INET;
-    address.sin_port = htons(port);
-    ip |= 0xC0;
-    ip = ip << 8;
-    ip |= 0xA8;
-    ip = ip << 8;
-    ip |= 0x00;
-    ip = ip << 8;
-    ip |= 0xF4;
-    address.sin_addr.s_addr = htonl(ip);
-
-    std::printf("[+] ip: ");
-    PrintSocket(address);
+    std::printf("---------------------------------- logs -----------------------------\n");
+    InitAddress(&address, port);
 
     std::printf("[+] create socket\n");
     sockfd = create_socket(AF_INET, SOCK_STREAM, 0);

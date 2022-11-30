@@ -5,6 +5,7 @@
 
 typedef struct sockaddr_in sockaddress;
 
-void PrintSocket(sockaddress addr);
+void PrintSocket(const sockaddress* addr);
+void InitAddress(sockaddr_in* adr, uint16_t port);
 
 #endif      // __SOCKET_IP_HPP__

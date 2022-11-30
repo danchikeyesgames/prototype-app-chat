@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cstring>
 
-#define DEBUG_SERVER
-
 #include "../../include/xchat/Client.hpp"
 
 static char* next_word(char* msg);
