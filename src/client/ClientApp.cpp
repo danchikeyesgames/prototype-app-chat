@@ -21,6 +21,10 @@ int main() {
     pthread_t thread;
 
     c.Connect();
+    if (c.check_error()) {
+        std::cout << "\033[91mfault connection\033[39m\n";
+        exit(EXIT_FAILURE);
+    }
 
     std::cout << "Enter nickname: ";
     std::cin >> buf;

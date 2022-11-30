@@ -72,8 +72,9 @@ int ClientSockets::create_socket(int domain, int type, int protocol) {
 int ClientSockets::connect_to_serv(int fd, __CONST_SOCKADDR_ARG addr, socklen_t len) {
     int sock = connect(fd, addr, len);
     if (sock == -1) {
-        perror("connect: ");
+        perror("\033[91m[+] connect");
         errors = errors | ERRCLNTCONN;
+        std::printf("\033[39m");
     }
 
     return sock;

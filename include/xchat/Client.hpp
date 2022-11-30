@@ -13,7 +13,8 @@ class Client : public ClientSockets, public Message {
         char name[32];
         void SaveMessageCommand(uint32_t command, uint32_t second_command) override;
         void GetMessageCommand(uint32_t* command, uint32_t* second_command) override;
-
+        
+        bool check_error();
         void InputName(char* name, uint32_t new_acc);
         void Connect();
         void SendMessage();

@@ -34,7 +34,12 @@ void Client::CloseSocket() {
 
 void Client::Connect() {
     uint32_t id, command, sec_command, myid;
+    
     socket_connect();
+    if (errors == ERRCLNTCONN) {
+        return;
+    }
+
     std::cout << "\033[92m[+] set connection successful\033[39m\n";
     void* ptr = NULL;
 
@@ -69,3 +74,7 @@ void Client::InputName(char* name, uint32_t new_acc) {
 Client::Client(int port) : ClientSockets(port), Message() {}
 
 Client::Client() : ClientSockets(), Message() {}
+
+bool Client::check_error() {
+    return errors ? true : false;
+}

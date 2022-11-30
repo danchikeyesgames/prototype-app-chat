@@ -144,7 +144,7 @@ void Server::SelectClient() {
     unsigned long fdmax = 0;
     FD_ZERO(&sock_set);
 
-    std::cout << "[+] wait message from sockets..........\n";
+    std::cout << "\033[36m[+] wait message from sockets..........\033[39m\n";
     pthread_mutex_lock(&list_mutex);
     std::list<node_t>::iterator it = clients.begin();
     std::list<node_t>::iterator itend = clients.end();

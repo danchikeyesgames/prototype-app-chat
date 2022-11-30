@@ -22,12 +22,13 @@ class ClientSockets {
     private:
         sockaddress address;
         unsigned short port;
-        unsigned int errors;
 
     public:
         ClientSockets(unsigned short port = default_port);
     
     protected:
+        unsigned int errors;
+
         int client_send(const void *msg, int len, int flags);
         int client_recv(void *buf, int len, int flags);
         int socket_connect();

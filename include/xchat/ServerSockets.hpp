@@ -27,7 +27,6 @@ class ServerSockets {
     private:
         sockaddress address;
         unsigned short port;
-        unsigned int errors;
 
     public:
         ServerSockets(unsigned short len_qeue, int _port = default_port);
@@ -39,6 +38,7 @@ class ServerSockets {
     protected:                             // protected
         int clientfd;
         int sockfd;
+        unsigned int errors;
 
         int     wait_accept();
         ssize_t server_send(int fd_client, const void *msg, int len, int flags);
