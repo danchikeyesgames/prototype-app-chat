@@ -29,7 +29,7 @@ TODO:
 
   - (READY) relize log in and command '/msg [nameto] [message]'
 
-  * add different colors to logs in server
+  - (READY) add different colors to logs in server
 
   * relize command '/online' to see all users online
 
