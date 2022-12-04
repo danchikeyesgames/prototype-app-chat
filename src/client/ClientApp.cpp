@@ -6,8 +6,6 @@
 static char* next_word(char* msg);
 static void* recv_thread(void* arg);
 
-
-
 int main() {
     Client c;
     char buf[1024] = {0};
@@ -15,14 +13,14 @@ int main() {
     char nameto[32] = {0};
     uint32_t command = 0, second = 0;
     char* pointer = NULL;
-    char* one;
-    char* two;
-    char* three;
+    char* command_ch;
+    char* name_cl;
+    int three;
     pthread_t thread;
 
     c.Connect();
     if (c.check_error()) {
-        std::cout << "\033[91mfault connection\033[39m\n";
+        std::cout << "\033[91mfailed connection\033[39m\n";
         exit(EXIT_FAILURE);
     }
 
@@ -39,11 +37,11 @@ int main() {
         std::cout << "\033[39m";
 
         if (std::strncmp(message, "/msg ", 5) == 0) {
-            one = next_word(message);
-            two = next_word(one);
-            int three = two - one - 1;
+            command_ch = next_word(message);
+            name_cl = next_word(command_ch);
+            three = name_cl - command_ch - 1;
             memcpy(nameto, message + 5, three);
-            // std::cout << nameto << ": " << three << " bytes\n";
+
             c.SaveMessageName(nameto);
             c.SaveMessageCommand(CMMNDSEND, 0);
             c.SaveMessageData(message + 5 + three + 1);
