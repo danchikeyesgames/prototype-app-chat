@@ -95,7 +95,7 @@ void Server::WaitClient() {
     cfd = wait_accept();
     fcntl(cfd, F_SETFD, O_NONBLOCK);
 
-    std::cout << "\033[01;38;05;154m[+] write id & fd to list: " << cfd << "\033[39m\n";
+    std::cout << "\033[38;05;58m[+] write id & fd to list: " << cfd << "\033[39m\n";
     node_t new_node;
     new_node.id = id;
     new_node.clientfd = cfd;
@@ -247,7 +247,7 @@ void ProcessMessage(void* arg) {
         }
         pthread_mutex_unlock(&list_mutex);
 
-        std::cout << "[+] message from " << name << ": " << data << "to" << chrt << "\n";
+        std::cout << "[+] message from " << name << ": " << data << " to " << chrt << "\n";
 
         if (name[0] == '\0') {
             //
@@ -283,7 +283,7 @@ void ProcessMessage(void* arg) {
             for (; it != itend; ++it) {
                 if (!std::strncmp(chrt, it->name, 32)) {
                     sentfd = it->clientfd;
-                    std::cout << "\033[01;38;05;222mfd: " << sentfd << "\033[39m\n";
+                    std::cout << "\033[01;38;05;222mfd: " << sentfd << "\033[0;39m\n";
                     break;
                 }
             }
