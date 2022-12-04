@@ -180,7 +180,8 @@ void ProcessMessage(void* arg) {
     char* chrt;
     char* data;
     uint8_t bufto[1024] = {0};
-    int sentfd;
+    int sentfd, rfd;
+    bool client_find = false;
 
     std::cout << "[+] start treature message\n";
     command = GETMSGIND(buffer, INDEXCONTROLPRIMAR);
@@ -225,8 +226,6 @@ void ProcessMessage(void* arg) {
         chrt = (char *) &buffer[INDEXNAME];
         sizedata = GETMSGIND(buffer, INDEXDATASIZE);
         sizename = GETMSGIND(buffer, INDEXNAMESIZE);
-        
-        std::cout << "sizedata: " << sizedata << "\n";
 
         if (sizedata > 512 || sizedata <= 256)
             data = (char *) &buffer[256];
@@ -242,6 +241,7 @@ void ProcessMessage(void* arg) {
         for (; it != itend; ++it) {
             if (id == it->id) {
                 std::memcpy(name, it->name, 32);
+                rfd = it->clientfd;
                 break;
             }
         }
@@ -250,7 +250,8 @@ void ProcessMessage(void* arg) {
         std::cout << "[+] message from " << name << ": " << data << " to " << chrt << "\n";
 
         if (name[0] == '\0') {
-            //
+            std::cout << "[+] such name not found\n";
+            return;
         } else {
             MSGTOUI32(bufto, INDEXID, 0);
             MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDMSG);
@@ -284,12 +285,20 @@ void ProcessMessage(void* arg) {
                 if (!std::strncmp(chrt, it->name, 32)) {
                     sentfd = it->clientfd;
                     std::cout << "\033[01;38;05;222mfd: " << sentfd << "\033[0;39m\n";
+                    client_find = true;
                     break;
                 }
             }
             pthread_mutex_unlock(&list_mutex);
             
-            send(sentfd, bufto, 1024, 0);
+            if (client_find)
+                send(sentfd, bufto, 1024, 0);
+            else {
+                std::cout << "[+] such name as " << chrt << "not found\n";
+
+                MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDNTFNU);
+                send(rfd, bufto, 1024, 0);
+            }
         }
     }
 }
