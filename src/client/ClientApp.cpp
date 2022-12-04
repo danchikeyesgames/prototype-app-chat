@@ -83,6 +83,11 @@ static void* recv_thread(void* arg) {
             memset(nameto, 0, 32);
             memcpy(nameto, pointer, 32);
             std::cout << "\033[35m" << nameto << ": " << (char *) (pointer + 32) << "\033[33m\n";
+        } else if (command = CMDNTFNU) {
+            memset(nameto, 0, 32);
+            pointer = (char *) client_class->LoadMessageName();
+            memcpy(nameto, pointer, 32);
+            std::cout << "\033[35muser with such nickname " << (char *) (pointer + 32) << "not found, message skipped\033[33m\n";
         }
 
         memset(nameto, 0, 32);
