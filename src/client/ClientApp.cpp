@@ -89,4 +89,6 @@ static void* recv_thread(void* arg) {
 
         memset(nameto, 0, 32);
     }
+
+    return NULL;
 }
