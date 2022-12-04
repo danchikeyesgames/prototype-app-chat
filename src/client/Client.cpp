@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 #include "../../include/xchat/Client.hpp"
 

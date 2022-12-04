@@ -19,7 +19,6 @@ class Client : public ClientSockets, public Message {
         void Connect();
         void SendMessage();
         int RecvMessage();
-        void WaitClient();
         void CloseSocket();
 
         Client(int port);

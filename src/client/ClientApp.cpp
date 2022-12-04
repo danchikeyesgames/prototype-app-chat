@@ -47,8 +47,11 @@ int main() {
             c.SaveMessageName(nameto);
             c.SaveMessageCommand(CMMNDSEND, 0);
             c.SaveMessageData(message + 5 + three + 1);
-            c.SendMessage();    
+            c.SendMessage();
         }
+
+        c.ClearMsg();
+        memset(nameto, '\0', 32);
     }
 
     c.CloseSocket();

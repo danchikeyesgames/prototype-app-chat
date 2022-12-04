@@ -95,7 +95,7 @@ void Server::WaitClient() {
     cfd = wait_accept();
     fcntl(cfd, F_SETFD, O_NONBLOCK);
 
-    std::cout << "[+] write id & fd to list\n";
+    std::cout << "\033[01;38;05;154m[+] write id & fd to list: " << cfd << "\033[39m\n";
     node_t new_node;
     new_node.id = id;
     new_node.clientfd = cfd;
@@ -127,6 +127,14 @@ void Server::DeleteClient(uint32_t id) {
         }
     }
     
+    it = clients.begin();
+    itend = clients.end();
+
+    std::cout << "list: \n";
+    for (; it != itend; ++it) {
+        std::cout << it->name << ": " << it->id << "\n";
+    }
+
     pthread_mutex_lock(&count_mutex);
     count[id] = 0;
     pthread_mutex_unlock(&count_mutex);
@@ -239,7 +247,7 @@ void ProcessMessage(void* arg) {
         }
         pthread_mutex_unlock(&list_mutex);
 
-        std::cout << "[+] message from " << name << ": " << data << "\n";
+        std::cout << "[+] message from " << name << ": " << data << "to" << chrt << "\n";
 
         if (name[0] == '\0') {
             //
@@ -275,6 +283,7 @@ void ProcessMessage(void* arg) {
             for (; it != itend; ++it) {
                 if (!std::strncmp(chrt, it->name, 32)) {
                     sentfd = it->clientfd;
+                    std::cout << "\033[01;38;05;222mfd: " << sentfd << "\033[39m\n";
                     break;
                 }
             }
