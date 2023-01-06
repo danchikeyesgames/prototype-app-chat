@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-std=c++11 -c
+FLAGS=-std=c++99 -c
 
 SERVERFILES=src/server/ServerSockets.cpp src/server/ServerApp.cpp src/SocketIp.cpp src/Message.cpp src/server/Server.cpp src/Threadpool.cpp
 CLIENTFILES=src/client/ClientSockets.cpp src/client/ClientApp.cpp src/SocketIp.cpp src/Message.cpp src/client/Client.cpp
