@@ -46,6 +46,13 @@ int main() {
             c.SaveMessageCommand(CMMNDSEND, 0);
             c.SaveMessageData(message + 5 + three + 1);
             c.SendMessage();
+        } else if (std::strncmp(message, "/online", 7) == 0) {
+            memset(nameto, 0, 32);
+
+            c.SaveMessageName(nameto);
+            c.SaveMessageCommand(CMMNDCHONLINE, 0);
+            c.SaveMessageData(message);
+            c.SendMessage();
         }
 
         c.ClearMsg();
@@ -83,11 +90,14 @@ static void* recv_thread(void* arg) {
             memset(nameto, 0, 32);
             memcpy(nameto, pointer, 32);
             std::cout << "\033[35m" << nameto << ": " << (char *) (pointer + 32) << "\033[33m\n";
-        } else if (command = CMDNTFNU) {
+        } else if (command == CMDNTFNU) {
             memset(nameto, 0, 32);
             pointer = (char *) client_class->LoadMessageName();
             memcpy(nameto, pointer, 32);
             std::cout << "\033[35muser with such nickname " << (char *) (pointer + 32) << "not found, message skipped\033[33m\n";
+        } else if (command == CMDONLINE) {
+            std::cout << "-----------------ONLINE--------------------\n";
+            std::cout << pointer << "\n";
         }
 
         memset(nameto, 0, 32);

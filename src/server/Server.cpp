@@ -300,5 +300,57 @@ void ProcessMessage(void* arg) {
                 send(rfd, bufto, 1024, 0);
             }
         }
+    } else if (command == CMMNDCHONLINE) {
+        id = GETMSGIND(buffer, INDEXID);
+        sizedata = GETMSGIND(buffer, INDEXDATASIZE);
+
+        MSGTOUI32(bufto, INDEXID, 0);
+        MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDONLINE);
+
+        if (sizedata > 512 || sizedata <= 256)
+            data = (char *) &buffer[256];
+        else
+            data = (char *) &buffer[512];
+        
+        char name[32] = {0};
+        int ByteOffset = 0;
+        char NewLine = '\n';
+        char TheEnd = '\0';
+
+        pthread_mutex_lock(&list_mutex);
+        std::list<node_t>::iterator it = clients.begin();
+        std::list<node_t>::iterator itend = clients.end();
+
+        for (; it != itend; ++it) {
+            if (id == it->id) {
+                std::memcpy(name, it->name, 32);
+                sentfd = it->clientfd;
+                client_find = true;
+            }
+
+            std::memcpy(bufto + INDEXDATA256 + ByteOffset, it->name, strlen(it->name));
+            std::memcpy(bufto + INDEXDATA256 + ByteOffset + strlen(it->name), &NewLine, 1);
+            ByteOffset += strlen(it->name) + 1;
+        }
+
+        pthread_mutex_unlock(&list_mutex);
+
+        MSGTOUI16(bufto, INDEXFORMATDATA256, FORMATCHR);
+        MSGTOUI16(bufto, INDEXFORMATDATA512, FORMATCHR);
+        MSGTOUI32(bufto, INDEXDATASIZE, 0);
+        std::memcpy(bufto + INDEXDATA256 + ByteOffset, &TheEnd, 1);
+            
+        std::cout << "-----------------ONLINE--------------------\n";
+        std::cout << (char*) (bufto + INDEXDATA256) << "\n";
+            
+        if (client_find)
+            send(sentfd, bufto, 1024, 0);
+        else {
+            std::cout << "[+] such name as " << chrt << "not found\n";
+
+            MSGTOUI32(bufto, INDEXCONTROLPRIMAR + 4, CMDNTFNU);
+            send(rfd, bufto, 1024, 0);
+        }
+    
     }
 }

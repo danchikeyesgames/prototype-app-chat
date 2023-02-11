@@ -11,6 +11,7 @@
 #define CMMNDSEND       0x2
 #define CMMNDLOADMSG    0x3
 #define CMMNDNICKNAME   0x4
+#define CMMNDCHONLINE   0x5
 
 #define CMMNDCNNCTNW 0x0
 #define CMMNDCNNCTCH 0x1
@@ -19,6 +20,7 @@
 #define CMDMSG      0x02
 #define CMDAPPLY    0x03
 #define CMDNTFNU    0x04
+#define CMDONLINE   0x05
 
 #define FORMATCHR 0x01
 #define FORMATSTR 0x02
