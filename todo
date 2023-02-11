@@ -31,7 +31,7 @@ TODO:
 
   - (READY) add different colors to logs in server
 
-  * relize command '/online' to see all users online
+  - (READY) relize command '/online' to see all users online
 
   * make bash script to improve autobuild 
 
