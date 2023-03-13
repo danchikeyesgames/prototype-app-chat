@@ -37,11 +37,13 @@ TODO:
 
   * make commandline to server for configuration
 
-  * add capable to create group chat with command '/create [names]...'
+  * add capable to create group chat with command '/create [groupname] [users]...'
+
+  * add capable to check groups with command '/group'
 
   * add support PostgreSQL data base to keep messages
 
-  * relize command '/lmsg [name]' to watch tail 10 message with user with nickname [name]
+  * relize command '/lmsg [name/group]' to watch tail 10 message with user with nickname [name] or group
 
   * relize sing in/sing up to server and save accaunt and settings in data base
 
@@ -51,7 +53,7 @@ TODO:
 
 -----------------------------------------------------------
 
-@ Realization window application:
+@ Realization window application: (Qt)
   *
 
 (c) Linux version
