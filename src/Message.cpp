@@ -1,6 +1,6 @@
 #include <cstring>
 
-#include "../include/Message.hpp"
+#include "Message.hpp"
 
 void Message::SaveMessageName(char* str) {
     memset(msg_send + INDEXNAME, 0, (size_t) 32);

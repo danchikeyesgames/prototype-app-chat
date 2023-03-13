@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../../include/xchat/Server.hpp"
+#include "xchat/Server.hpp"
 
 int main() {
     Server myserver = 4888;

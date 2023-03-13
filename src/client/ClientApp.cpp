@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 
-#include "../../include/xchat/Client.hpp"
+#include "xchat/Client.hpp"
 
 static char* next_word(char* msg);
 static void* recv_thread(void* arg);

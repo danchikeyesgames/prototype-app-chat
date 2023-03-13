@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <string>
 
-#include "../include/SocketIp.hpp"
+#include "SocketIp.hpp"
 
 void PrintSocket(const sockaddress* addr) {
     std::printf("%d.%d.%d.%d:%u\033[39m\n", 

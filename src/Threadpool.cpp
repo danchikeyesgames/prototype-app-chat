@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 
-#include "../include/Threadpool.hpp"
+#include "Threadpool.hpp"
 
 struct Threadpool::pth_work {
     pthreadpool_work_t  func;

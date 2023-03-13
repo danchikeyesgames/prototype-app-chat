@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <fcntl.h>
 
-#include "../../include/xchat/ServerSockets.hpp"
+#include "xchat/ServerSockets.hpp"
 
 ServerSockets::ServerSockets(unsigned short len_qeue, int _port) : port(_port) {
     errors = 0;

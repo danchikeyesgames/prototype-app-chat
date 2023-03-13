@@ -2,8 +2,8 @@
 #include <fcntl.h>
 #include <cstring>
 
-#include "../../include/xchat/ServerVar.hpp"
-#include "../../include/xchat/Server.hpp"
+#include "xchat/ServerVar.hpp"
+#include "xchat/Server.hpp"
 
 void Server::SaveMessageCommand(uint32_t command, uint32_t second_command) {
     SavePrimaryTwo(command);

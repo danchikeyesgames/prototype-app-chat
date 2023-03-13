@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 
-#include "../../include/xchat/Client.hpp"
+#include "xchat/Client.hpp"
 
 void Client::SaveMessageCommand(uint32_t command, uint32_t second_command) {
     SavePrimary(command);

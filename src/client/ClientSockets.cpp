@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "../../include/xchat/ClientSockets.hpp"
+#include "xchat/ClientSockets.hpp"
 
 #define DEBUG_SERVER
 
